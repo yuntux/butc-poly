@@ -1,0 +1,37 @@
+<html>
+<body>
+<!--<FORM ACTION = "/cgi-bin/modulev2.cgi" METHOD = post>-->
+<FORM ACTION = "/cgi-bin/modulev2.cgi" METHOD = post>
+<INPUT TYPE = hidden NAME = PBX_MODE VALUE = "1"> <!-- passage par formulaire -->
+<INPUT TYPE = hidden NAME = PBX_SITE VALUE = "1999888">
+<INPUT TYPE = hidden NAME = PBX_RANG VALUE = "99">
+<INPUT TYPE = hidden NAME = PBX_IDENTIFIANT VALUE = "2">
+<INPUT TYPE = hidden NAME = PBX_TOTAL VALUE = "1500">
+<INPUT TYPE = hidden NAME = PBX_DEVISE VALUE = "978">
+<INPUT TYPE = hidden NAME = PBX_CMD VALUE = "date_heure_18">
+<INPUT TYPE = hidden NAME = PBX_PORTEUR VALUE = "yuntux@gmail.com">
+<INPUT TYPE = hidden NAME = PBX_RETOUR VALUE = "ref:R;trans:T;montant:M;auto:A;idtrans:S;sign:K">
+<INPUT TYPE = hidden NAME = PBX_REPONDRE_A VALUE = "http://80.67.175.138/cgi-bin/valider_paiement.php"><!-- url HTTP permettant une validation saine-->
+<!--
+<INPUT TYPE = hidden NAME = PBX_EFFECTUE VALUE = "http://80.67.175.138/code/modules/boutique_en_ligne/vue/paiement_effectue.html">
+<INPUT TYPE = hidden NAME = PBX_REFUSE VALUE = "http://80.67.175.138/code/modules/boutique_en_ligne/vue/paiement_refuse.html">
+<INPUT TYPE = hidden NAME = PBX_ANNULE VALUE = "http://80.67.175.138/code/modules/boutique_en_ligne/vue/paiement_annule.html">
+-->
+<INPUT TYPE = hidden NAME = PBX_PAYBOX VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">
+<INPUT TYPE = hidden NAME = PBX_BACKUP1 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">
+<INPUT TYPE = hidden NAME = PBX_BACKUP2 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">
+<INPUT TYPE = hidden NAME = PBX_EFFECTUE VALUE = "http://www.utc.fr">
+<INPUT TYPE = hidden NAME = PBX_REFUSE VALUE = "http://www.utc.fr">
+<INPUT TYPE = hidden NAME = PBX_ANNULE VALUE = "http://www.utc.fr">
+<INPUT TYPE = submit NAME = bouton_paiement VALUE = "paiement">
+</FORM>
+
+./modulev2.cgi PBX_MODE=4 PBX_SITE=1999888 PBX_RANG=99 PBX_IDENTIFIANT=2 PBX_TOTAL=1500 PBX_DEVISE=978 PBX_CMD=ref123 PBX_PORTEUR=yuntux@gmail.com PBX_EFFECTUE=http://172.26.248.6/code/modules/boutique_en_ligne/vue/paiement_effectue.html PBX_REFUSE=http://172.26.248.6/code/modules/boutique_en_ligne/vue/paiement_effectue.html PBX_ANNULE=http://172.26.248.6/code/modules/boutique_en_ligne/vue/paiement_effectue.html PBX_RETOUR=montant:M;ref:R;auto:A;trans:T 
+
+./modulev2.cgi PBX_MODE=4 PBX_SITE=1999888 PBX_RANG=99 PBX_IDENTIFIANT=2 PBX_TOTAL=1500 PBX_DEVISE=978 PBX_CMD=ref123 PBX_PORTEUR=yuntux@gmail.com PBX_RETOUR=montant:M;ref:R;auto:A;trans:T
+
+
+</body>
+</html>
+
+

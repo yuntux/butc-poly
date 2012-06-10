@@ -1,0 +1,51 @@
+<div id="content">
+<?php 
+
+if (isset($message)) {
+    echo '<span class="erreur_formulaire">'.$message.'</span>';
+}
+
+
+//TABLEAU DES OFFRES
+echo '<div class="post">
+<h2 class="title">Trajet(s)</h2>
+<div class="entry">
+<table>
+<tr>
+	<th>ID</th>
+	<th>Ville départ</th>
+	<th>Date départ</th>
+	<th>Ville arrivée</th>
+	<th>Date arrivée</th>
+	<th>Actions</th>
+</tr>';
+
+while($ligne = $liste_trajet->fetch())
+{
+		echo '<tr>';
+			echo '<td>'.$ligne->id_trajet.'</td>';
+			echo '<td>'.$ligne->ville_dep.'</td>';
+			echo '<td>'.$ligne->date_depart.'</td>';
+			echo '<td>'.$ligne->ville_ar.'</td>';
+			echo '<td>'.$ligne->date_arrivee.'</td>';
+
+		echo '<td>';
+		echo ' <a href=index.php?module=equipement&action=detailler_trajet&cle='.$ligne->id_trajet.'>Détailler</a>';
+		if ($_SESSION['administrateur']==1) {
+			echo ' <a href=index.php?module=equipement&action=modifier_trajet&cle='.$ligne->id_trajet.'>Modifier</a>';
+			echo ' <a href="index.php?module=equipement&action=supprimer_trajet&cle='.$ligne->id_trajet.'">Supprimer</a>';
+		}
+	
+		echo '</td>';
+
+		echo '</tr>';
+}
+
+echo '</TABLE>';
+echo '<br>Il y a <b>'.$nb_enregistrements.' objet(s)</b> de ce type.<br>';
+echo '<br><a href="index.php?module=equipement&action=ajouter_trajet">Ajouter</a>';
+
+?>
+</div></div>
+<div style="clear: both;">&nbsp;</div>
+</div>

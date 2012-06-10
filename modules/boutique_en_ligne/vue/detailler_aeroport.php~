@@ -1,0 +1,32 @@
+<div id="content">
+<?php
+
+$ligne = $modele_aeroport->fetch();
+
+echo '<div class="post">
+<h2 class="title">Détail aéroport</h2>
+<div class="entry">
+<br>
+<table border="0" cellspacing="1" cellpadding="2">
+	<tr>
+		<th>Nom</th>
+		<td>'.$ligne->nom.'</td>
+	</tr>
+	<tr>
+		<th>Ville</th>	
+		<td>'.$ligne->ville.'</td>
+	</tr>
+</table>';
+
+		if ($_SESSION['administrateur']==1) {
+			echo '<br><a href=index.php?module=equipement&action=modifier_aeroport&cle='.$ligne->nom.'>Modifier</a>';
+			echo '<br><a href="index.php?module=equipement&action=supprimer_aeroport&cle='.$ligne->nom.'">Supprimer</a>';
+		}
+
+
+include('liste_terminal.php');
+
+?>
+</div></div>
+<div style="clear: both;">&nbsp;</div>
+</div>

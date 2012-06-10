@@ -1,0 +1,17 @@
+<?php
+
+	if ((isset($_SESSION['login'])) && (!empty($_SESSION['login'])))  {
+
+	include_once CHEMIN_MODELE.'equipement.php';
+	$aeroport=detailler_aeroport($_GET['cle']);
+	/*$liste_terminal=liste_terminal($_GET['cle']);
+	$nb_enregistrements=compter_terminal($_GET['cle']);
+	include 'vue/detailler_aeroport.php';*/
+	
+
+} else {
+	include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
+
+}
+
+?>
