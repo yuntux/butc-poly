@@ -1,7 +1,7 @@
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="panier">
 <form name="modif_panier" action="index.php?module=boutique_en_ligne&action=boutique_en_ligne" method="post">
-<TABLE id="pannier">
-	<CAPTION>Pannier référence <?php if(isset($_SESSION['panier']['reference'])) echo $_SESSION['panier']['reference'];?></CAPTION>
+<TABLE id="panier">
+	<CAPTION>Panier référence <?php if(isset($_SESSION['panier']['reference'])) echo $_SESSION['panier']['reference'];?></CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>
 	</THEAD>
@@ -64,9 +64,11 @@ if (ENVIRONNEMENT_DEMO) {
 	echo '<INPUT TYPE = hidden NAME = PBX_BACKUP2 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
 }
 */
-if ($total_panier>0)
+if ($total_panier>0){
 	echo '<input type="submit" name="payer_panier" value="PAYER" class="btn_valider">';
-
+	if (ENVIRONNEMENT_DEMO)
+		echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
+}
 ?>
 </FORM>
 </div>

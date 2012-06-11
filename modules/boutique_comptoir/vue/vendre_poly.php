@@ -34,7 +34,6 @@ if(!isset($_SESSION['etudiant_en_cours'])) {
 	<h3>Saisie étudiant</h3>
 	<form name="saisie_etudiant" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post" autocomplete="off">
 	<input type="text" name="num_badge_etudiant" id="num_badge_etudiant" value="" onkeyup="test_longueur_code_etudiant();">
-	<!--<input type="submit" name="ajouter_poly_code_barre" value="Ajouter" class="btn_valider">-->
 	</form>
 </div>';
 } else {
@@ -42,10 +41,12 @@ if(!isset($_SESSION['etudiant_en_cours'])) {
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="liste_poly">
 	<h3>Étudiant en cours</h3>
 	<form name="fiche_etudiant" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">';
+
 	echo 'login : '.$_SESSION['etudiant_en_cours']['login'].'<br>';
 	echo 'NOM : '.$_SESSION['etudiant_en_cours']['nom'].'<br>';
 	echo 'Prénom : '.$_SESSION['etudiant_en_cours']['prenom'].'<br>';
 	echo '<input type="submit" name="changer_etudiant" value="Changer d\'étudiant" class="btn_valider">';
+echo '<img src="https://demeter.utc.fr/pls/portal30/portal30.get_photo_utilisateur?username=adumaine" alt="Photo non disponible"/>';
 	echo '
 	</form>
 </div>';
@@ -55,8 +56,8 @@ if(isset($_SESSION['etudiant_en_cours']) && $_SESSION['etudiant_en_cours']!="") 
 	echo '
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="panier" autocomplete="off">
 <form name="modif_panier" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">
-<TABLE id="pannier">
-	<CAPTION>Pannier</CAPTION>
+<TABLE id="panier">
+	<CAPTION>Panier</CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>
 	</THEAD>
