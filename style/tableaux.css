@@ -7,7 +7,7 @@ margin:auto;
 
 thead, tfoot {
 background-color:#D0E3FA;
-border:1px solid #6495ed;
+/*border:1px solid #6495ed;*/
 }
 caption {
  background-image:url('https://demeter.utc.fr/pls/portal30/docs/PAGE/PORTLETREPOSITORY/OTHER_PROVIDERS/PORTAIL_SIGAM/IMAGES/BARRE.PNG');

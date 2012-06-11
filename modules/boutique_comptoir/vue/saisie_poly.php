@@ -12,10 +12,10 @@ echo '
 	}
 </script>
 <div style="float:left;margin-top:10px;width:40%">
-<div class="groupe" id="liste_poly">
+<div class="groupe" id="etudiant_en_cours style="">
 	<h3>Étudiant en cours</h3>
 	<form name="fiche_etudiant" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">';
-	echo '<img src="https://demeter.utc.fr/pls/portal30/portal30.get_photo_utilisateur?username='.$_SESSION['etudiant_en_cours']['login'].'" alt="Photo non disponible" WIDTH="100"  style="float: left; margin: 4px;"/>';
+	echo '<img src="https://demeter.utc.fr/pls/portal30/portal30.get_photo_utilisateur?username='.$_SESSION['etudiant_en_cours']['login'].'" alt="Photo non disponible" WIDTH="100"  style="float: left; margin: 10px;"/>';
 	echo '<p>';
 	echo 'login : '.$_SESSION['etudiant_en_cours']['login'].'<br>';
 	echo 'NOM : '.$_SESSION['etudiant_en_cours']['nom'].'<br>';
@@ -34,10 +34,10 @@ echo'
 	</form>
 </div>
 </div>
-<div class="groupe" style="float: right;margin-top:10px;width:57%;" id="panier" autocomplete="off">
+<div class="groupe" style="float: right;margin-top:10px;width:57%;" id="panier" autocomplete="on">
 <form name="modif_panier" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">
 <TABLE id="pannier">
-	<CAPTION>Pannier</CAPTION>
+	<CAPTION>Panier</CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>
 	</THEAD>
@@ -87,6 +87,5 @@ if ($total_panier > 0) {
 }
 
 echo'</div>
-
 <br>';
 ?>
