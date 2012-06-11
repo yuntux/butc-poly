@@ -27,8 +27,9 @@ echo '
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="liste_poly">
 	<h3>Saisie des polys</h3>
 	<form name="ajouter_poly" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post" autocomplete="off">
-	<input type="text" name="code_poly" id="code_poly" value="" onkeyup="test_longueur_code_poly(); ">
-	<!--<input type="submit" name="ajouter_poly_code_barre" value="Ajouter" class="btn_valider">-->
+	<input type="text" name="code_poly" id="code_poly" value="" onkeyup="test_longueur_code_poly(); ">';
+if (ENVIRONNEMENT_DEMO) echo 'CODE BARRE DU POLY DE DEMO : LB24C1P12';
+echo'
 	</form>
 </div>
 <br>
@@ -78,14 +79,14 @@ echo '
 
 if ($total_panier > 0) {
 	echo '
-	<form name="modif_panier" action="index.php?module=boutique_en_ligne&action=paiement_comptoir" method="post">
+	<form name="modif_panier" action="index.php?module=boutique_comptoir&action=paiement_comptoir" method="post">
 	<input type="submit" name="payer_cb" value="PAIEMENT CB" class="btn_valider">
 	<input type="submit" name="payer_moneo" value="PAIEMENT MONEO" class="btn_valider">
 	<input type="submit" name="payer_cheque" value="PAIEMENT CHEQUE" class="btn_valider">
 	</FORM>';
 }
 
-echo'</div>';
+echo'</div>
 
 <br>';
 ?>
