@@ -22,6 +22,10 @@ define('RACINE_SSO', 'cas');
 //Définir environnement de démo
 define('ENVIRONNEMENT_DEMO', 1);
 
+//PARAMETRE POUR LES LECTEURS RFID
+define('LONGUEUR_NUM_CARTE_ETU', '5');
+define('LONGUEUR_CODE_POLY', '9');
+
 //Paramètres PAYBOX
 //define('IP_SERVEUR_BUTC', '172.25.12.239');
 define('IP_SERVEUR_BUTC', '80.67.175.138');

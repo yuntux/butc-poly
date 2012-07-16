@@ -11,27 +11,10 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			include_once CHEMIN_MODELE.'boutique_comptoir.php';
 			include_once(CHEMIN_LIB.'fonctions-panier.php');
 
-
-
-				if (isset($_POST['num_badge_etudiant'])) { //saisie de l'étudiant avec le code RFID de la carte
-					unset($_SESSION['etudiant_en_cours']);
-					supprimePanier();
-				    $detail_etudiant = detailler_utilisateur($_POST['num_badge_etudiant'], "")->fetch();
-					$_SESSION['etudiant_en_cours']['num_badge'] = $detail_etudiant->num_badge;
-					$_SESSION['etudiant_en_cours']['login'] = $detail_etudiant->login;
-					$_SESSION['etudiant_en_cours']['nom'] = $detail_etudiant->nom;
-					$_SESSION['etudiant_en_cours']['prenom'] = $detail_etudiant->prenom1;
-					creationPanier();
-				}
-
-				if (isset($_POST['changer_etudiant'])) { //saisie de l'étudiant avec le code RFID de la carte
-					supprimePanier();
-					unset($_SESSION['etudiant_en_cours']);
-				}
-
 				//on ne peut pas retirer tant que l'étudiant n'a pas été séléctionné
 				if(isset($_SESSION['etudiant_en_cours']) && $_SESSION['etudiant_en_cours']!="") {
-							if (isset($_POST['valider_retrait'])) {
+
+/*							if (isset($_POST['valider_retrait'])) {
 								enregistrer_entete_retrait($_SESSION['panier']['reference'], $_SESSION['etudiant_en_cours']['login'], $_SESSION['login']);
 								for ($i=0 ;$i < CompterArticles(); $i++)
 								{
@@ -39,12 +22,12 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 								}
 								unset($_SESSION['etudiant_en_cours']);
 							}
-
-					        include CHEMIN_VUE.'retirer_poly.php';
+*/
+							$liste_retraits_possibles = liste_retraits_possibles($_SESSION['etudiant_en_cours']['login']);
+					        include CHEMIN_VUE.'retrait_poly.php';
 
 				} else {
-							$liste_commandes = liste_commandes($_SESSION['etudiant_en_cours']['login']);
-					        include CHEMIN_VUE.'choix_etudiant.php';
+					header('Location: index.php?module=boutique_comptoir&action=choix_etudiant&action_post_choix=retirer_poly');
 				}
 //  include CHEMIN_VUE.'vendre_poly.php';
 

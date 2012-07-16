@@ -69,14 +69,17 @@ if ($total_panier>0){
 	if (ENVIRONNEMENT_DEMO)
 		echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
 }
+echo '</FORM>';
+echo '</div>';
+if (isset($message_erreur)) echo '<strong>'.$message_erreur.'</strong>';
 ?>
-</FORM>
-</div>
+
 
 <br>
 
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="liste_poly">
-<form name="ajouter_poly" action="index.php?module=boutique_en_ligne&action=boutique_en_ligne" method="post">
+<form name="code_poly" action="index.php?module=boutique_en_ligne&action=boutique_en_ligne" method="post">
+
 	<TABLE id="liste_poly">		
 		<CAPTION>Liste des poly disponibles</CAPTION>
 		<THEAD>
@@ -90,7 +93,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_tc_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -98,7 +101,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_tc_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</td>
@@ -106,7 +109,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_tsh->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -118,7 +121,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gb_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -126,7 +129,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gb_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -139,7 +142,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gi_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -147,7 +150,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gi_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -160,7 +163,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gm_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -168,7 +171,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gm_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -181,7 +184,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gp_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -189,7 +192,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gp_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -202,7 +205,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gsm_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -210,7 +213,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gsm_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -223,7 +226,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gsu_cs->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>
@@ -231,7 +234,7 @@ if ($total_panier>0){
 	<?php
 		while($poly = $liste_poly_gsu_tm->fetch())
 		{
-			echo '<input type="submit" name="ajouter_poly" value="'.$poly->code_barre.'">';
+			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
 				</TD>

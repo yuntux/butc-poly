@@ -27,10 +27,13 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	creationPanier();
 
 	
-        if (isset($_POST['ajouter_poly'])) { //si le formulaire a été envoyé, il faut vérifier les modifications
-            $detail_poly = detailler_poly($_POST['ajouter_poly'])->fetch();
-			ajouterArticle($detail_poly->code_barre, 1, $detail_poly->prix);
-//FIXME : vérifier le comportement de ajouter_article dans le cas où le code issu de ajouter_poly n'existe pas.
+        if (isset($_POST['code_poly'])) { //si le formulaire a été envoyé, il faut vérifier les modifications
+            $detail_poly = detailler_poly($_POST['code_poly'])->fetch();
+			if ($detail_poly->code_barre != "")
+				ajouterArticle($detail_poly->code_barre, 1, $detail_poly->prix);
+			else
+				$message_erreur = "Le poly ".$_POST['code_poly']." est invalide.";
+//FIXME : vérifier le comportement de ajouter_article dans le cas où le code issu de code_poly n'existe pas.
 		}
 
 		if (isset($_GET['supprimer_poly']))

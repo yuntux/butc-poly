@@ -37,6 +37,7 @@ try {
     $connexion = new PDO('mysql:host='.SQL_HOST.';dbname='.SQL_DATABASE, SQL_USERNAME, SQL_PASSWORD, array(
     PDO::ATTR_PERSISTENT => true
 )); // CONNEXION PERSISTANTE : pas besoin de la fermer en fin de script, elle est mise en cache
+	$connexion->exec("SET CHARACTER SET utf8");
 } catch (PDOException $e) {
     print "Erreur ! : " . $e->getMessage();
     die();
