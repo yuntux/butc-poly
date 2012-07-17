@@ -42,13 +42,6 @@ function enregistrer_ligne_commande($id_entete_commande, $poly, $quantite){
 	return $resultats;
 }
 
-function enregistrer_paiement($id_entete_commande, $mode_paiement){
-	global $connexion;
-	$resultats=$connexion->query("INSERT INTO paiement(reference_commande, date_heure_paiement, mode_paiement) VALUES (".$connexion->quote($id_entete_commande, PDO::PARAM_STR).", NOW(), ".$connexion->quote($mode_paiement, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
-	$resultats->setFetchMode(PDO::FETCH_OBJ);
-	return $resultats;
-}
-
 function enregistrer_entete_retrait($id, $login_acheteur, $login_vendeur){
 	global $connexion;
 	$resultats=$connexion->query("INSERT INTO entete_retrait(id, login_acheteur, login_vendeur, date_heure_retrait) VALUES (".$connexion->quote($id, PDO::PARAM_STR).",".$connexion->quote($login_acheteur, PDO::PARAM_STR).",".$connexion->quote($login_vendeur, PDO::PARAM_STR).",NOW())") or die(print_r($connexion->errorInfo()));

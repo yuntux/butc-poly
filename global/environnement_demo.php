@@ -8,33 +8,37 @@
 	//$_SESSION['login']='usertest';
 
 	//paramètre de démo de la base
-		
-	if(isset($_GET['profil_demo_acheteur']))
-	{
+
+	if(isset($_GET['profil_demo'])){
 		$_SESSION['administrateur'] = 0;
 		$_SESSION['vendeur'] = 0;
+		$_SESSION['acheteur'] = 0;
+		$_SESSION['imprimeur'] = 0;
+		$_SESSION['regisseur'] = 0;
+		$_SESSION['enseignant'] = 0;
+	}
+
+	if($_GET['profil_demo']='acheteur')
 		$_SESSION['acheteur'] = 1;
-	}
-
-	if(isset($_GET['profil_demo_admin']))
-	{
+	if($_GET['profil_demo']='admin')
 		$_SESSION['administrateur'] = 1;
-		$_SESSION['vendeur'] = 0;
-		$_SESSION['acheteur'] = 0;
-	}
-
-	if(isset($_GET['profil_demo_vendeur']))
-	{
-		$_SESSION['administrateur'] = 0;
+	if($_GET['profil_demo']='vendeur')
 		$_SESSION['vendeur'] = 1;
-		$_SESSION['acheteur'] = 0;
-	}
+	if($_GET['profil_demo']='imprimeur')
+		$_SESSION['imprimeur'] = 1;
+	if($_GET['profil_demo']='regisseur')
+		$_SESSION['regisseur'] = 1;
+	if($_GET['profil_demo']='enseignant')
+		$_SESSION['enseignant'] = 1;
 
-	echo 'ENVIRONNEMENT DE DEMO';
+	echo 'ENVIRONNEMENT DE DEMO ';
 
-	echo '<a href="index.php?profil_demo_acheteur=1" >Profil acheteur</a>        ';
-	echo '<a href="index.php?profil_demo_vendeur=1">Profil vendeur</a>       ';
-	echo '<a href="index.php?profil_demo_admin=1">Profil admin</a>';
+	echo '<a href="index.php?profil_demo=acheteur" >Profil acheteur</a> ';
+	echo '<a href="index.php?profil_demo=enseignant">Profil enseignant</a> ';
+	echo '<a href="index.php?profil_demo=imprimeur">Profil imprimeur</a> ';
+	echo '<a href="index.php?profil_demo=vendeur">Profil vendeur</a> ';
+	echo '<a href="index.php?profil_demo=regisseur">Profil régisseur</a> ';
+	echo '<a href="index.php?profil_demo=admin">Profil admin</a>';
 
 	//Identifiants paybox de démo
 /*	define('PBX_SITE', 1999888);

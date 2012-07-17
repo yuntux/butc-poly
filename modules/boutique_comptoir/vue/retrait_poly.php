@@ -50,20 +50,15 @@ GROUP BY codep
 						 echo "<td>".$poly_non_retires."</td>";
 						 echo "<td>".$stock_poly."</td>";
 						if ($stock_poly <  $poly_non_retires) {
-								$retirable = $stock_poly;
+								$retirable = 'value="'.$stock_poly.'" style="background-color: red"';	
 						} else {
-								$retirable = $poly_non_retires;
+								$retirable = 'value="'.$poly_non_retires.'"';
 						}
-						 echo '<td><input type="text" name="'.$ligne->codep.'" id="'.$ligne->codep.'" value="'.$retirable.'"></td>';
+						 echo '<td><input type="text" name="code_poly_'.$ligne->codep.'" id="'.$ligne->codep.'" '.$retirable.' size="2"></td>';
 						 echo "</tr>";
 					}
 		}
 	echo '</TBODY>
-	<TFOOT>
-		<TR><td colspan="5">
-
-		</td></TR>
-	</TFOOT>
 </TABLE>
 	<input type="submit" name="valider_retrait" value="RETIRER" class="btn_valider">
 </form></div>';
