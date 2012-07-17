@@ -39,7 +39,7 @@
 
 echo '</TABLE>';
 echo '</form>';
-echo '<form name="modif_panier" action="index.php?module=boutique_en_ligne&action=demande_paiement_paybox" method="post">';
+
 
 /*echo '<FORM ACTION = "/cgi-bin/modulev2.cgi" METHOD = post>';
 echo '<INPUT TYPE = hidden NAME = PBX_MODE VALUE = "'.PBX_MODE.'">';
@@ -65,7 +65,15 @@ if (ENVIRONNEMENT_DEMO) {
 }
 */
 if ($total_panier>0){
-	echo '<input type="submit" name="payer_panier" value="PAYER" class="btn_valider">';
+	if ($_SESSION['formation_continue']) {
+		echo '<form name="modif_panier" action="index.php?module=boutique_en_ligne&action=vente_interne" method="post">';
+		echo '<input type="submit" name="vente_interne" value="GRATUIT FORMATION CONTINUE" class="btn_valider">';
+	}
+	else {
+		echo '<form name="modif_panier" action="index.php?module=boutique_en_ligne&action=demande_paiement_paybox" method="post">';
+		echo '<input type="submit" name="payer_panier" value="PAYER" class="btn_valider">';
+	}
+
 	if (ENVIRONNEMENT_DEMO)
 		echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
 }

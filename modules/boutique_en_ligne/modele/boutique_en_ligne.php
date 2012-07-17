@@ -73,6 +73,13 @@ GROUP BY codep") or die(print_r($connexion->errorInfo()));
 	return $resultats;
 }
 
+function enregistrer_paiement($id_commande, $mode_paiement){
+	global $connexion;
+	$resultats=$connexion->query("UPDATE entete_commande SET date_heure_paiement= NOW(), mode_paiement=".$connexion->quote($mode_paiement, PDO::PARAM_STR)." WHERE id = ".$connexion->quote($id_commande, PDO::PARAM_INT)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 /*
 function liste_poly_commandes_payees($login){
 	global $connexion;

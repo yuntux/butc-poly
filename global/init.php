@@ -27,9 +27,9 @@ if (1 == get_magic_quotes_gpc())
 	phpCAS::setNoCasServerValidation();
 
 if ($_SESSION['login'] == 'adumaine') $_SESSION['administrateur'] = 1;
-if (ENVIRONNEMENT_DEMO) {
+if (ENVIRONNEMENT_DEMO)
 	include('environnement_demo.php');
-}
+
 
 //Connexion à la base de donnée
 

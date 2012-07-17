@@ -16,20 +16,20 @@
 		$_SESSION['imprimeur'] = 0;
 		$_SESSION['regisseur'] = 0;
 		$_SESSION['enseignant'] = 0;
-	}
 
-	if($_GET['profil_demo']='acheteur')
-		$_SESSION['acheteur'] = 1;
-	if($_GET['profil_demo']='admin')
-		$_SESSION['administrateur'] = 1;
-	if($_GET['profil_demo']='vendeur')
-		$_SESSION['vendeur'] = 1;
-	if($_GET['profil_demo']='imprimeur')
-		$_SESSION['imprimeur'] = 1;
-	if($_GET['profil_demo']='regisseur')
-		$_SESSION['regisseur'] = 1;
-	if($_GET['profil_demo']='enseignant')
-		$_SESSION['enseignant'] = 1;
+		if($_GET['profil_demo']=='acheteur')
+			$_SESSION['acheteur'] = 1;
+		if($_GET['profil_demo']=='admin')
+			$_SESSION['administrateur'] = 1;
+		if($_GET['profil_demo']=='vendeur')
+			$_SESSION['vendeur'] = 1;
+		if($_GET['profil_demo']=='imprimeur')
+			$_SESSION['imprimeur'] = 1;
+		if($_GET['profil_demo']=='regisseur')
+			$_SESSION['regisseur'] = 1;
+		if($_GET['profil_demo']=='enseignant')
+			$_SESSION['enseignant'] = 1;
+	}
 
 	echo 'ENVIRONNEMENT DE DEMO ';
 

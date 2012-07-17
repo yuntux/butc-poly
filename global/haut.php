@@ -34,10 +34,13 @@ Released   : 20090918
 <body>
 
 <h1>BUTC - Vente en ligne des polycopiés</h1>
-<?php
-	echo 'UTILISATEUR : '.$_SESSION['login'];
-	echo '<a href="index.php?deconnexion">Déconnexion</a>';
-?>
+
+<div class="left">	
+<form name="deco" action="index.php?module=utilisateur&action=deconnexion" method="post">
+<?php echo 'UTILISATEUR : '.$_SESSION['login']; ?>
+<input type="submit" name="changer_etudiant" value="Déconnexion" class="btn_annuler">
+</form>
+</div>
 
 <div class="right">
       <b><i>Si vous rencontrez un probl&egrave;me technique sur le site :</i></b>
@@ -51,21 +54,21 @@ Released   : 20090918
   <ul>
 	<?php
 	if (isset($_SESSION['administrateur']) &&  $_SESSION['administrateur']==1) {
-		echo '<li><a href="index.php?module=utilisateur&action=utilisateur">Gestion des droits</a></li>';
+		echo '<li><a href="index.php?module=utilisateur&action=utilisateur"'; if($_GET['module']=="utilisateur" && $_GET['action']=="utilisateur") echo ' class="current" '; echo '>Gestion des droits</a></li>';
 //		echo '<li><a href="index.php?module=utilisateur&action=incoherence_paiement" class="current">Incohérences de paiement</a></li>';
 //		echo '<li><a href="index.php?module=utilisateur&action=retrais_incoherents" class="current">Retraits supérieurs aux paiements/commandes</a></li>';
 //		echo '<li><a href="index.php?module=utilisateur&action=payes_non_retires" class="current">Payés non retirés</a></li>';
 	}
 	if (isset($_SESSION['acheteur']) &&  $_SESSION['acheteur']==1) {
-		echo '<li><a href="index.php?module=boutique_en_ligne&action=boutique_en_ligne">Acheter des poly</a></li>';
+		echo '<li><a href="index.php?module=boutique_en_ligne&action=boutique_en_ligne"'; if($_GET['module']=="boutique_en_ligne" && $_GET['action']=="boutique_en_ligne") echo ' class="current" '; echo '>Acheter des poly</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=synthese">Synthèse achats</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=liste_commandes">Commandes</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=liste_paiements">Paiement</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=liste_retraits">Retraits</a></li>';
 	}
 	if (isset($_SESSION['vendeur']) &&  $_SESSION['vendeur']==1) {
-		echo '<li><a href="index.php?module=boutique_comptoir&action=vendre_poly">Vendre des polys</a></li>';
-		echo '<li><a href="index.php?module=boutique_comptoir&action=retirer_poly">Retirer des polys</a></li>';
+		echo '<li><a href="index.php?module=boutique_comptoir&action=vendre_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="vendre_poly") echo ' class="current" '; echo '>Vendre des polys</a></li>';
+		echo '<li><a href="index.php?module=boutique_comptoir&action=retirer_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="retirer_poly") echo ' class="current" '; echo '>Retirer des polys</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=stock">Stocks</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=livraison_imprimeur">Livraisons imprimeur</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=vente_interne">Vente interne</a></li>';

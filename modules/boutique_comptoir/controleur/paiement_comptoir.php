@@ -12,7 +12,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			include_once(CHEMIN_LIB.'fonctions-panier.php');
 
 			if(isset($_SESSION['etudiant_en_cours']) && $_SESSION['etudiant_en_cours']!="") {
-					if (isset($_POST['paiement_cb']) || isset($_POST['paiement_moneo']) || isset($_POST['paiement_cheuqe'])) {
+					if (isset($_POST['paiement_cb']) || isset($_POST['paiement_moneo']) || isset($_POST['paiement_cheque']) || isset($_POST['vente_interne'])) {
 						//on enregistre la commande en base
 						enregistrer_entete_commande($_SESSION['panier']['reference'], $_SESSION['etudiant_en_cours']['login'], $_SESSION['login']);
 						for ($i=0 ;$i < CompterArticles() ; $i++)
@@ -26,6 +26,8 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 							enregistrer_paiement($_SESSION['panier']['reference'], 'CHEQUE');
 						if (isset($_POST['paiement_moneo']))
 							enregistrer_paiement($_SESSION['panier']['reference'], 'MONEO');
+						if (isset($_POST['vente_interne']) && $_SESSION['etudiant_en_cours']['formation_continue'])
+							enregistrer_paiement($_SESSION['panier']['reference'], 'INTERNE');
 
 						//on enregistre le retrait
 						enregistrer_entete_retrait($_SESSION['panier']['reference'], $_SESSION['etudiant_en_cours']['login'], $_SESSION['login']);
@@ -33,15 +35,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 						{
 							enregistrer_ligne_retrait($_SESSION['panier']['reference'], $_SESSION['panier']['libelleProduit'][$i], $_SESSION['panier']['qteProduit'][$i]);
 						}
-
-						//on supprime le panier
-						supprimePanier();
-
-						//on change d'étudiant
-						unset($_SESSION['etudiant_en_cours']);
-
-						//on redirige vers vendre_poly
-						include('vendre_poly.php');
+						header('Location: index.php?module=boutique_comptoir&action=changer_etudiant&action_post_changement=vendre_poly');
 					}
 			}
 

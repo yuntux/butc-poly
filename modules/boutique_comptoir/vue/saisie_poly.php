@@ -26,7 +26,9 @@ echo'
 	</form>
 </div>
 </div>
-<div class="groupe" style="float: right;margin-top:10px;width:57%;" id="panier" autocomplete="on">
+
+<div style="float: right;width:57%;">
+<div class="groupe" id="panier" autocomplete="on">
 <form name="modif_panier" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">
 <TABLE id="pannier">
 	<CAPTION>Panier</CAPTION>
@@ -74,10 +76,10 @@ if ($total_panier > 0) {
 	<form name="modif_panier" action="index.php?module=boutique_comptoir&action=paiement_comptoir" method="post">
 	<input type="submit" name="payer_cb" value="PAIEMENT CB" class="btn_valider">
 	<input type="submit" name="payer_moneo" value="PAIEMENT MONEO" class="btn_valider">
-	<input type="submit" name="payer_cheque" value="PAIEMENT CHEQUE" class="btn_valider">
-	</FORM>';
+	<input type="submit" name="payer_cheque" value="PAIEMENT CHEQUE" class="btn_valider">';
+	if ($_SESSION['etudiant_en_cours']['formation_continue'])
+		echo '<input type="submit" name="vente_interne" value="VENTE INTERNE" class="btn_valider">';
+	echo '</FORM>';
 }
-
-echo'</div>
-<br></div>';
+echo'</div></div>';
 ?>
