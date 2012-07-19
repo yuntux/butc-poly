@@ -1,6 +1,4 @@
 <?php
-// Inclusion du fichier de configuration (qui définit des constantes)
-include 'global/config.php';
 
 //on affiche pas les erreurs php lorsqu'on est en prod !
 ini_set('display_errors', 0);
@@ -26,7 +24,6 @@ if (1 == get_magic_quotes_gpc())
 	phpCAS::setLang(PHPCAS_LANG_FRENCH);
 	phpCAS::setNoCasServerValidation();
 
-if ($_SESSION['login'] == 'adumaine') $_SESSION['administrateur'] = 1;
 if (ENVIRONNEMENT_DEMO)
 	include('environnement_demo.php');
 

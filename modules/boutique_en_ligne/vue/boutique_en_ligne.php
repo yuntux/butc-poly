@@ -64,6 +64,7 @@ if (ENVIRONNEMENT_DEMO) {
 	echo '<INPUT TYPE = hidden NAME = PBX_BACKUP2 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
 }
 */
+echo '<strong>Aucun polycopié payé ne sera remboursé. Aucun polycopié retiré ne sera repris ou échangé.</strong><br>';
 if ($total_panier>0){
 	if ($_SESSION['formation_continue']) {
 		echo '<form name="modif_panier" action="index.php?module=boutique_en_ligne&action=vente_interne" method="post">';

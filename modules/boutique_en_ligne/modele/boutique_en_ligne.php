@@ -73,39 +73,19 @@ GROUP BY codep") or die(print_r($connexion->errorInfo()));
 	return $resultats;
 }
 
-function enregistrer_paiement($id_commande, $mode_paiement){
+function enregistrer_paiement($id_commande, $mode_paiement, $proprietaire_moyen_paiement, $references_moyen_paiement){
 	global $connexion;
-	$resultats=$connexion->query("UPDATE entete_commande SET date_heure_paiement= NOW(), mode_paiement=".$connexion->quote($mode_paiement, PDO::PARAM_STR)." WHERE id = ".$connexion->quote($id_commande, PDO::PARAM_INT)) or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("UPDATE entete_commande SET date_heure_paiement= NOW(), mode_paiement=".$connexion->quote($mode_paiement, PDO::PARAM_STR)." , proprietaire_moyen_paiement=".$connexion->quote($proprietaire_moyen_paiement, PDO::PARAM_STR)." , references_moyen_paiement=".$connexion->quote($references_moyen_paiement, PDO::PARAM_STR)." WHERE id = ".$connexion->quote($id_commande, PDO::PARAM_INT)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
 
-/*
-function liste_poly_commandes_payees($login){
+function articles_sans_code_barre(){
 	global $connexion;
-	$resultats=$connexion->query("SELECT lc.code_poly FROM paiement p, ligne_retrait lc WHERE p.reference_commande=ec.id AND p.mode_paiement != '' AND ec.login_acheteur=".$connexion->quote($login, PDO::PARAM_INT)." AND lc.code_barre_poly =".$connexion->quote($code_poly, PDO::PARAM_STR)." AND lc.id_entete_commande=ec.id GROUP BY lc.code_poly") or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("SELECT code_barre, designation FROM poly WHERE sans_code_barre=1") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
-	$resultats = $resultat->fetch();
-	return $resultats->lc.quantite;
+	return $resultats;
 }
-
-function nb_exemplaires_commandes_payees($login, $poly){
-	global $connexion;
-//SELECT SUM(lc.quantite), lc.code_poly, ec.login_acheteur, lc.id_entete_commande, ec.id FROM ligne_commande lc, entete_commande ec  WHERE ec.login_acheteur='adumaine'  AND lc.code_poly = 'LB24C1P12' AND lc.id_entete_commande=ec.id GROUP BY lc.code_poly
-	$resultats=$connexion->query("SELECT SUM(lc.quantite), lc.code_poly, ec.login_acheteur, lc.id_entete_commande, ec.id, p.mode_paiement FROM paiement p, ligne_commande lc, entete_commande ec  WHERE ec.login_acheteur=".$connexion->quote($login, PDO::PARAM_INT)." AND lc.code_poly =".$connexion->quote($code_poly, PDO::PARAM_STR)." AND lc.id_entete_commande=ec.id  AND p.reference_commande=ec.id AND p.mode_paiement!=''GROUP BY lc.code_poly") or die(print_r($connexion->errorInfo()));
-	$resultats->setFetchMode(PDO::FETCH_OBJ);
-	$resultats = $resultat->fetch();
-	return $resultats->lc.quantite;
-}
-
-function nb_exemplaires_retires($login, $poly){
-	global $connexion;
-	$resultats=$connexion->query("SELECT SUM(lc.quantite), lc.code_poly, ec.login_acheteur, lc.id_entete_commande, ec.id FROM ligne_retrait lc, entete_retrait ec  WHERE ec.login_acheteur=".$connexion->quote($login, PDO::PARAM_INT)." AND lc.code_poly =".$connexion->quote($code_poly, PDO::PARAM_STR)." AND lc.id_entete_commande=ec.id GROUP BY lc.code_poly") or die(print_r($connexion->errorInfo()));
-	$resultats->setFetchMode(PDO::FETCH_OBJ);
-	$resultats = $resultat->fetch();
-	return $resultats->lc.quantite;
-}
-*/
 
 function stock_poly($poly){
 	return 1000;

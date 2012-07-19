@@ -1,5 +1,6 @@
 <?php
 // Initialisation
+include 'global/config.php';
 include 'global/init.php';
 
 

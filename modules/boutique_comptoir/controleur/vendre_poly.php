@@ -25,6 +25,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 							if (isset($_GET['supprimer_poly']))
 								supprimerArticle($_GET['supprimer_poly']);
 
+							$articles_sans_code_barre = articles_sans_code_barre();
 					        include CHEMIN_VUE.'saisie_poly.php';
 				} else {
 					header('Location: index.php?module=boutique_comptoir&action=choix_etudiant&action_post_choix=vendre_poly');

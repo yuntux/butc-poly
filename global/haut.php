@@ -69,6 +69,8 @@ Released   : 20090918
 	if (isset($_SESSION['vendeur']) &&  $_SESSION['vendeur']==1) {
 		echo '<li><a href="index.php?module=boutique_comptoir&action=vendre_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="vendre_poly") echo ' class="current" '; echo '>Vendre des polys</a></li>';
 		echo '<li><a href="index.php?module=boutique_comptoir&action=retirer_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="retirer_poly") echo ' class="current" '; echo '>Retirer des polys</a></li>';
+		echo '<li><a href="index.php?module=boutique_comptoir&action=brouillard_caisse"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="brouillard_caisse") echo ' class="current" '; echo '>Brouillard de caisse</a></li>';
+		echo '<li><a href="index.php?module=boutique_comptoir&action=formation_continue"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="formation_continue") echo ' class="current" '; echo '>Formation continue</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=stock">Stocks</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=livraison_imprimeur">Livraisons imprimeur</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=vente_interne">Vente interne</a></li>';
