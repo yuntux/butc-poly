@@ -41,6 +41,5 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
 
         include CHEMIN_VUE.'boutique_en_ligne.php';
-
-}
-?>
+	}
+ ?>

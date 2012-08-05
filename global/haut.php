@@ -61,6 +61,7 @@ Released   : 20090918
 	}
 	if (isset($_SESSION['acheteur']) &&  $_SESSION['acheteur']==1) {
 		echo '<li><a href="index.php?module=boutique_en_ligne&action=boutique_en_ligne"'; if($_GET['module']=="boutique_en_ligne" && $_GET['action']=="boutique_en_ligne") echo ' class="current" '; echo '>Acheter des poly</a></li>';
+		echo '<li><a href="index.php?module=boutique_en_ligne&action=historique"'; if($_GET['module']=="boutique_en_ligne" && $_GET['action']=="hitorique") echo ' class="current" '; echo '>Historique</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=synthese">Synthèse achats</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=liste_commandes">Commandes</a></li>';
 //		echo '<li><a href="index.php?module=boutique_en_ligne&action=liste_paiements">Paiement</a></li>';
@@ -69,12 +70,17 @@ Released   : 20090918
 	if (isset($_SESSION['vendeur']) &&  $_SESSION['vendeur']==1) {
 		echo '<li><a href="index.php?module=boutique_comptoir&action=vendre_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="vendre_poly") echo ' class="current" '; echo '>Vendre des polys</a></li>';
 		echo '<li><a href="index.php?module=boutique_comptoir&action=retirer_poly"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="retirer_poly") echo ' class="current" '; echo '>Retirer des polys</a></li>';
-		echo '<li><a href="index.php?module=boutique_comptoir&action=brouillard_caisse"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="brouillard_caisse") echo ' class="current" '; echo '>Brouillard de caisse</a></li>';
+	echo '<li><a href="index.php?module=boutique_comptoir&action=brouillard_caisse"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="brouillard_caisse") echo ' class="current" '; echo '>Brouillard de caisse</a></li>';
 		echo '<li><a href="index.php?module=boutique_comptoir&action=formation_continue"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="formation_continue") echo ' class="current" '; echo '>Formation continue</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=stock">Stocks</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=livraison_imprimeur">Livraisons imprimeur</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=vente_interne">Vente interne</a></li>';
 //		echo '<li><a href="index.php?module=boutique_comptoir&action=brouillard_caisse">Brouillard de caisse</a></li>';
+	}
+
+	if (isset($_SESSION['regisseur']) &&  $_SESSION['regisseur']==1) {
+		
+		echo '<li><a href="index.php?module=boutique_comptoir&action=export_compta.php"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="export_compta") echo ' class="current" '; echo '>Exports vers la comptabilité</a></li>';
 	}
 	?>
   </ul>

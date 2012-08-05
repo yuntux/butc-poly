@@ -15,30 +15,6 @@ include CHEMIN_VUE.'cartouche_etudiant.php';
 	</THEAD>
 	<TBODY>';
 
-/*
-SELECT lc.code_poly AS codep, SUM(lc.quantite) AS qte_payee
-FROM entete_commande ec
-		INNER JOIN ligne_commande lc ON ec.id=lc.id_entete_commande
-WHERE ec.date_heure_paiement IS NOT NULL AND ec.login_acheteur='adumaine'
-GROUP BY codep
-
-SELECT lr.code_poly AS codep, SUM(lr.quantite) AS qte_retiree
-FROM 	entete_retrait er
-		INNER JOIN ligne_retrait lr ON er.id=lr.id_entete_retrait
-WHERE er.login_acheteur='adumaine'
-GROUP BY codep
-
-SELECT lc.code_poly AS codep, SUM(lc.quantite) AS qte_payee, retraits.qte_retiree
-FROM entete_commande ec
-		INNER JOIN ligne_commande lc ON ec.id=lc.id_entete_commande
-		LEFT OUTER JOIN (SELECT lr.code_poly AS cpr, SUM(lr.quantite) AS qte_retiree
-						FROM 	entete_retrait er
-						INNER JOIN ligne_retrait lr ON er.id=lr.id_entete_retrait
-						WHERE er.login_acheteur='adumaine'
-						GROUP BY cpr) AS retraits ON retraits.cpr=lc.code_poly
-WHERE ec.date_heure_paiement IS NOT NULL AND ec.login_acheteur='adumaine'
-GROUP BY codep
-*/
 		while($ligne = $liste_retraits_possibles->fetch()){
 					$poly_non_retires = $ligne->qte_payee - $ligne->qte_retiree;
 					if ($poly_non_retires != 0) {

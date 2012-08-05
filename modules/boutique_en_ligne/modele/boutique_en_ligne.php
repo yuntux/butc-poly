@@ -73,6 +73,29 @@ GROUP BY codep") or die(print_r($connexion->errorInfo()));
 	return $resultats;
 }
 
+function liste_commandes($login){
+	global $connexion;
+	$resultats=$connexion->query(
+"SELECT *
+	FROM entete_comande commande,
+	(SELECT ec.id AS identifiant, SUM(p.prix*lc.quantite) AS montant_commande
+	FROM entete_commande ec, ligne_commande lc
+			INNER JOIN poly p ON p.code_barre=lc.code_poly
+	WHERE lc.id_entete_commande=ec.id AND ec.id=commande.id) AS prix_commande
+	INNER JOIN commande.id = prix_commande.identifiant
+WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
+
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function liste_retraits($login){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM entete_retrait WHERE login_achteur=".$connexion->quote($login, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 function enregistrer_paiement($id_commande, $mode_paiement, $proprietaire_moyen_paiement, $references_moyen_paiement){
 	global $connexion;
 	$resultats=$connexion->query("UPDATE entete_commande SET date_heure_paiement= NOW(), mode_paiement=".$connexion->quote($mode_paiement, PDO::PARAM_STR)." , proprietaire_moyen_paiement=".$connexion->quote($proprietaire_moyen_paiement, PDO::PARAM_STR)." , references_moyen_paiement=".$connexion->quote($references_moyen_paiement, PDO::PARAM_STR)." WHERE id = ".$connexion->quote($id_commande, PDO::PARAM_INT)) or die(print_r($connexion->errorInfo()));
