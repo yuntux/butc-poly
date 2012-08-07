@@ -24,6 +24,19 @@ WHERE lc.id_entete_commande=ec.id AND ec.id= ".$connexion->quote($id_commande, P
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
+
+function liste_paiements($date, $moyen_paiement){
+	global $connexion;
+	$resultats=$connexion->query(
+"SELECT  ec.id AS id_commande, SUM(p.prix*lc.quantite) AS montant_commande, ec.date_heure_commande, ec.proprietaire_moyen_paiement, ec.references_moyen_paiement AS ref
+	FROM entete_commande ec, ligne_commande lc
+			INNER JOIN poly p ON p.code_barre=lc.code_poly
+	WHERE lc.id_entete_commande=ec.id AND ec.mode_paiement=".$connexion->quote($moyen_paiement, PDO::PARAM_STR)." AND DATE(ec.date_heure_paiement)=".$connexion->quote($date, PDO::PARAM_STR)."
+	GROUP BY ec.id
+") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
 /*
 SELECT * 
 FROM  `entete_commande` 

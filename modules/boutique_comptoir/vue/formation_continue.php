@@ -15,5 +15,5 @@ echo '<h2>Liste des utilisateurs en formation continue (elligibles à la vente i
             }
     echo '</TBODY> 
 </TABLE>';
-echo '<br><a href="index.php?module=boutique_comptoir&action=facture_formation_continue">Facture récapitulative</a>';
+echo '<br><a href="modules/boutique_comptoir/controleur/facture_formation_continue.php"Facture récapitulative</a>';
 ?>
