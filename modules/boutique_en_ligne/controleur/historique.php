@@ -14,8 +14,8 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 		$login = $_SESSION['login'];
 
 	$retraits_possibles = liste_retraits_possibles($login);
-	$commandes = liste_commandes($login);
-	$retraits = liste_retraits($login);
+	$liste_commandes = liste_commandes($login);
+	$liste_retraits = liste_retraits($login);
 
     include CHEMIN_VUE.'historique.php';
 }

@@ -1,16 +1,18 @@
 <?php
 require_once('../../../global/config.php');
 ini_set('display_errors', 1);
-//require_once('../../../global/init.php');
-try {
-    $connexion = new PDO('mysql:host='.SQL_HOST.';dbname='.SQL_DATABASE, SQL_USERNAME, SQL_PASSWORD, array(
-    PDO::ATTR_PERSISTENT => true
-)); // CONNEXION PERSISTANTE : pas besoin de la fermer en fin de script, elle est mise en cache
-	$connexion->exec("SET CHARACTER SET utf8");
-} catch (PDOException $e) {
-    print "Erreur ! : " . $e->getMessage();
-    die();
-}
+
+	try {
+		$connexion = new PDO('mysql:host='.SQL_HOST.';dbname='.SQL_DATABASE, SQL_USERNAME, SQL_PASSWORD, array(
+		PDO::ATTR_PERSISTENT => true
+	)); // CONNEXION PERSISTANTE : pas besoin de la fermer en fin de script, elle est mise en cache
+		$connexion->exec("SET CHARACTER SET utf8");
+	} catch (PDOException $e) {
+		print "Erreur ! : " . $e->getMessage();
+		die();
+	}
+
+//FIX ME : sécuriser la génération PDF
 require_once('../modele/brouillard_caisse.php');
 require_once('../../../libs/tcpdf/config/lang/fra.php');
 require_once('../../../libs/tcpdf/tcpdf.php');

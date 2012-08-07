@@ -39,8 +39,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 //  include CHEMIN_VUE.'vendre_poly.php';
 
 	} else {
-echo $_SESSION['vendeur'];
-	        //include CHEMIN_VUE_GLOBALE.'hacker.php';
+	    include CHEMIN_VUE_GLOBALE.'hacker.php';
 	}
 
 }

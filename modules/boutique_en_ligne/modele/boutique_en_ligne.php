@@ -75,23 +75,51 @@ GROUP BY codep") or die(print_r($connexion->errorInfo()));
 
 function liste_commandes($login){
 	global $connexion;
-	$resultats=$connexion->query(
-"SELECT *
-	FROM entete_comande commande,
-	(SELECT ec.id AS identifiant, SUM(p.prix*lc.quantite) AS montant_commande
-	FROM entete_commande ec, ligne_commande lc
-			INNER JOIN poly p ON p.code_barre=lc.code_poly
-	WHERE lc.id_entete_commande=ec.id AND ec.id=commande.id) AS prix_commande
-	INNER JOIN commande.id = prix_commande.identifiant
-WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("SELECT * FROM entete_commande WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
 
+function ligne_commande($id_commande){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_commande INNER JOIN poly ON code_poly=poly.code_barre WHERE id_entete_commande=".$connexion->quote($id_commande, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
 
 function liste_retraits($login){
 	global $connexion;
-	$resultats=$connexion->query("SELECT * FROM entete_retrait WHERE login_achteur=".$connexion->quote($login, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("SELECT * FROM entete_retrait WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function ligne_retrait($id_retrait){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_retrait WHERE id_entete_retrait=".$connexion->quote($id_retrait, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function utilisateur_formation_continue(){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM utilisateur WHERE formation_continue=1") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function vente_interne_utilisateur($login=""){
+	global $connexion;
+$requete = "SELECT lc.code_poly AS codep, p.prix AS prix, SUM(lc.quantite) AS quantite FROM entete_commande ec 
+INNER JOIN ligne_commande lc ON ec.id = lc.id_entete_commande 
+INNER JOIN poly p ON p.code_barre = lc.code_poly 
+WHERE ec.date_heure_paiement IS NOT NULL  AND ec.mode_paiement ='INTERNE'";
+
+if ($login != "")
+	$requete.=" AND ec.login_acheteur =".$connexion->quote($login, PDO::PARAM_STR);
+
+$requete.=" GROUP BY codep";
+	$resultats=$connexion->query($requete) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
