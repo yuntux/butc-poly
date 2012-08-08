@@ -118,6 +118,28 @@ function ligne_retrait($id_retrait){
 	return $resultats;
 }
 
+function liste_impressions(){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM entete_impression") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function ligne_impression($id_impression){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_impression WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function supprimer_impression($id_impression){
+	global $connexion;
+	$resultats=$connexion->query("DELETE entete_impression WHERE id=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+
 function utilisateur_formation_continue(){
 	global $connexion;
 	$resultats=$connexion->query("SELECT * FROM utilisateur WHERE formation_continue=1") or die(print_r($connexion->errorInfo()));
