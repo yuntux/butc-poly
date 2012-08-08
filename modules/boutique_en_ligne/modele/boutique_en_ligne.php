@@ -1,11 +1,14 @@
 <?php
 function lister_poly($branche="", $type=""){
 	global $connexion;
-	if ($branche != "") {
-	$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id AND rel_uv_branche.branche=".$connexion->quote($branche, PDO::PARAM_STR)."AND uv.type LIKE ".$connexion->quote($type, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
-	} else {
-	$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id AND branche='GI')") or die(print_r($connexion->errorInfo()));
-	}
+	if (($branche != "") && ($type != ""))
+		$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id AND rel_uv_branche.branche=".$connexion->quote($branche, PDO::PARAM_STR)."AND uv.type LIKE ".$connexion->quote($type, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
+/*else {
+		if ($type != "") {
+		$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id AND branche LIKE ".$connexion->quote($branche, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
+	} */
+	if (($branche == "") && ($type == ""))
+		$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id)") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -52,6 +55,20 @@ function enregistrer_entete_retrait($id, $login_acheteur, $login_vendeur){
 function enregistrer_ligne_retrait($id_entete_retrait, $poly, $quantite){
 	global $connexion;
 	$resultats=$connexion->query("INSERT INTO ligne_retrait(id_entete_retrait, code_poly, quantite) VALUES (".$connexion->quote($id_entete_retrait, PDO::PARAM_STR).",".$connexion->quote($poly, PDO::PARAM_STR).",".$connexion->quote($quantite, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function enregistrer_entete_impression($id, $login){
+	global $connexion;
+	$resultats=$connexion->query("INSERT INTO entete_impression(id, login_imprimeur, date_heure_impression) VALUES (".$connexion->quote($id, PDO::PARAM_STR).",".$connexion->quote($login, PDO::PARAM_STR).",NOW())") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function enregistrer_ligne_impression($id_entete_impression, $poly, $quantite){
+	global $connexion;
+	$resultats=$connexion->query("INSERT INTO ligne_impression(id_entete_impression, code_poly, quantite) VALUES (".$connexion->quote($id_entete_impression, PDO::PARAM_STR).",".$connexion->quote($poly, PDO::PARAM_STR).",".$connexion->quote($quantite, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }

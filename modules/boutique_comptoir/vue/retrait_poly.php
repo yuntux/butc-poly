@@ -1,6 +1,15 @@
 <?php
 if(isset($_SESSION['etudiant_en_cours']) && $_SESSION['etudiant_en_cours']!="") {
 
+echo '
+<script type="text/javascript">
+	window.onkeydown=function(e){
+	    if(e.which == 123)
+			 document.getElementById("valider_retrait").click();
+	}
+</script>
+';
+
 $action_post_changement='retirer_poly';
 include CHEMIN_VUE.'cartouche_etudiant.php';
 
@@ -36,7 +45,8 @@ include CHEMIN_VUE.'cartouche_etudiant.php';
 		}
 	echo '</TBODY>
 </TABLE>
-	<input type="submit" name="valider_retrait" value="RETIRER" class="btn_valider">
+	<br>
+	<input type="submit" id="valider_retrait" name="valider_retrait" value="RETIRER [F12]" class="btn_valider">
 </form></div>';
 
 }

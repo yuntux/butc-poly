@@ -79,8 +79,12 @@ Released   : 20090918
 	}
 
 	if (isset($_SESSION['regisseur']) &&  $_SESSION['regisseur']==1) {
-		
-		echo '<li><a href="index.php?module=boutique_comptoir&action=export_compta.php"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="export_compta") echo ' class="current" '; echo '>Exports vers la comptabilité</a></li>';
+		echo '<li><a href="index.php?module=boutique_comptoir&action=export_compta"' ; if($_GET['module']=="boutique_comptoir" && $_GET['action']=="export_compta") echo ' class="current" '; echo '>Exports vers la comptabilité</a></li>';
+	}
+
+
+	if (isset($_SESSION['imprimeur']) &&  $_SESSION['imprimeur']==1) {
+		echo '<li><a href="index.php?module=imprimerie&action=liste_impression"' ; if($_GET['module']=="imprimerie" && $_GET['action']=="liste_impression") echo ' class="current" '; echo '>Liste des impressions</a></li>';
 	}
 	?>
   </ul>

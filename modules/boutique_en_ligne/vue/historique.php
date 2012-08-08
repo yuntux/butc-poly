@@ -63,7 +63,7 @@ echo '<h2>Retraits</h2>';
 			</THEAD>
 	    <TBODY>';
 		$ligne_retrait = ligne_retrait($ligne->id);
-		while($l = $ligne_commande->fetch()){
+		while($l = $ligne_retrait->fetch()){
 			echo "<tr>";
 			echo "<td>".$l->code_poly."</td>";
             echo "<td>".$l->quantite."</td>";

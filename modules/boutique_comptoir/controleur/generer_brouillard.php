@@ -185,6 +185,31 @@ $liste_paiements_interne = '
 		$liste_paiements_interne.='</tbody></table>
 ';
 $pdf->writeHTML($liste_paiements_interne, true, false, false, false, '');
+
+
+$montant_sortie_stock=0;
+$liste_sortie_stock = '
+<TABLE cellspacing="0" cellpadding="1" border="1">
+	<CAPTION>Liste des sorties de stock</CAPTION><br>
+	<THEAD>
+	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH><Quantité/TH> <TH>Montant</TH> </tr>		
+	</THEAD>
+		<tbody>';
+		    while($l = $sortie_stock->fetch()){
+		        $liste_sortie_stock.="<tr>";
+		        $liste_sortie_stock.="<td>".$l->codep."</td>";
+		        $liste_sortie_stock.="<td>".$l->prix."</td>";
+		        $liste_sortie_stock.="<td>".$l->quantite."</td>";
+				$montant_poly = $l->prix*$l->quantite;
+				$motant_sortie_stock = $montant_sortie_stock + $montant_poly;
+		        $liste_sortie_stock.="<td>".$montant_poly"</td>";
+		        $liste_sortie_stock.="</tr>";
+			}
+		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>
+';
+$pdf->writeHTML($liste_sortie_stock, true, false, false, false, '');
+
+
 // This method has several options, check the source code documentation for more information.
 $pdf->Output('example_001.pdf', 'I');
 ?>
