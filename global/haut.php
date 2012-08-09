@@ -85,6 +85,7 @@ Released   : 20090918
 
 	if (isset($_SESSION['imprimeur']) &&  $_SESSION['imprimeur']==1) {
 		echo '<li><a href="index.php?module=imprimerie&action=liste_impression"' ; if($_GET['module']=="imprimerie" && $_GET['action']=="liste_impression") echo ' class="current" '; echo '>Liste des impressions</a></li>';
+		echo '<li><a href="index.php?module=imprimerie&action=liste_poly"' ; if($_GET['module']=="imprimerie" && $_GET['action']=="liste_poly") echo ' class="current" '; echo '>Liste des polys</a></li>';
 	}
 	?>
   </ul>

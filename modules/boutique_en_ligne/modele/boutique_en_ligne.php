@@ -8,7 +8,24 @@ function lister_poly($branche="", $type=""){
 		$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id AND branche LIKE ".$connexion->quote($branche, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
 	} */
 	if (($branche == "") && ($type == ""))
-		$resultats=$connexion->query("SELECT * FROM uv, poly, rel_uv_branche WHERE (poly.id_uv=uv.id AND rel_uv_branche.uv=uv.id)") or die(print_r($connexion->errorInfo()));
+		$resultats=$connexion->query("
+		SELECT *, (qte_commandee-qte_retiree) AS reste_a_retirer
+		FROM poly
+				LEFT OUTER JOIN uv ON uv.code=poly.id_uv
+				LEFT OUTER JOIN (SELECT lr.code_poly AS cpr, SUM(lr.quantite) AS qte_retiree
+								FROM ligne_retrait lr
+								GROUP BY cpr) AS retraits ON retraits.cpr=poly.code_barre
+				LEFT OUTER JOIN (SELECT lc.code_poly AS cpc, SUM(lc.quantite) AS qte_commandee
+								FROM ligne_commande lc
+								GROUP BY cpc) AS commandes ON commandes.cpc=poly.code_barre
+		") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function modif_stock_poly($code_poly, $delta_stock){
+	global $connexion;
+	$resultats=$connexion->query("UPDATE poly SET stock_courant=stock_courant+(".$connexion->quote($delta_stock, PDO::PARAM_INT).") WHERE code_barre=".$connexion->quote($code_poly, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -16,6 +33,13 @@ function lister_poly($branche="", $type=""){
 function lister_uv(){
 	global $connexion;
 	$resultats=$connexion->query("SELECT * FROM uv") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function enregistrer_poly($id_uv, $code_barre, $type, $prix, $sans_code_barre, $dispo_commande_en_ligne){
+	global $connexion;
+	$resultats=$connexion->query("INSERT INTO poly(id_uv, code_barre, type, prix, sans_code_barre, dispo_commande_en_ligne) VALUES (".$connexion->quote($id_uv, PDO::PARAM_STR).",".$connexion->quote($code_barre, PDO::PARAM_STR).",".$connexion->quote($type, PDO::PARAM_STR).",".$connexion->quote($prix, PDO::PARAM_INT).",".$connexion->quote($sans_code_barre, PDO::PARAM_INT).",".$connexion->quote($dispo_commande_en_ligne, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -76,6 +100,8 @@ function enregistrer_entete_impression($id, $login){
 function enregistrer_ligne_impression($id_entete_impression, $poly, $quantite){
 	global $connexion;
 	$resultats=$connexion->query("INSERT INTO ligne_impression(id_entete_impression, code_poly, quantite) VALUES (".$connexion->quote($id_entete_impression, PDO::PARAM_STR).",".$connexion->quote($poly, PDO::PARAM_STR).",".$connexion->quote($quantite, PDO::PARAM_INT).")") or die(print_r($connexion->errorInfo()));
+//FIX ME : remplacer ça par un trigger (pas de calcul de stock avec impressions-retraits car stock initial non nul => champ stock_courant)
+	modif_stock_poly($poly, $quantite);
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -83,9 +109,10 @@ function enregistrer_ligne_impression($id_entete_impression, $poly, $quantite){
 function liste_retraits_possibles($login){
 	global $connexion;
 	$resultats=$connexion->query("
-SELECT lc.code_poly AS codep, SUM(lc.quantite) AS qte_payee, retraits.qte_retiree
+SELECT lc.code_poly AS codep, SUM(lc.quantite) AS qte_payee, retraits.qte_retiree, p.stock_courant
 FROM entete_commande ec
 		INNER JOIN ligne_commande lc ON ec.id=lc.id_entete_commande
+		LEFT OUTER JOIN poly p ON p.code_barre=lc.code_poly
 		LEFT OUTER JOIN (SELECT lr.code_poly AS cpr, SUM(lr.quantite) AS qte_retiree
 						FROM 	entete_retrait er
 						INNER JOIN ligne_retrait lr ON er.id=lr.id_entete_retrait
@@ -111,9 +138,16 @@ function ligne_commande($id_commande){
 	return $resultats;
 }
 
-function liste_retraits($login){
+function liste_retraits($login="", $date=""){
 	global $connexion;
-	$resultats=$connexion->query("SELECT * FROM entete_retrait WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	if ($login != "")
+		$resultats=$connexion->query("SELECT * FROM entete_retrait WHERE login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	if ($date != "")
+		$resultats=$connexion->query("
+SELECT *
+FROM entete_retrait
+	INNER JOIN ligne_retrait ON ligne_retrait.id_entete_retrait=entete_retrait.id
+WHERE DATE(date_heure_retrait)=".$connexion->quote($date, PDO::PARAM_STR)." GROUP BY code_poly") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -125,9 +159,16 @@ function ligne_retrait($id_retrait){
 	return $resultats;
 }
 
-function liste_impressions(){
+function liste_impressions($date=""){
 	global $connexion;
 	$resultats=$connexion->query("SELECT * FROM entete_impression") or die(print_r($connexion->errorInfo()));
+	if ($date != "")
+		$resultats=$connexion->query("
+			SELECT *
+			FROM entete_impression
+				INNER JOIN ligne_impression ON ligne_impression.id_entete_impression=entete_impression.id
+			WHERE DATE(date_heure_impression)=".$connexion->quote($date, PDO::PARAM_STR)." GROUP BY code_poly") or die(print_r($connexion->errorInfo()));
+
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -141,9 +182,14 @@ function ligne_impression($id_impression){
 
 function supprimer_impression($id_impression){
 	global $connexion;
-//FIX ME DELETE ON CASCADE => COMME ÇA C'EST SUPER CRADE !
+//FIX ME : DELETE ON CASCADE => COMME ÇA C'EST SUPER CRADE !
 	$resultats=$connexion->query("DELETE FROM entete_impression WHERE id=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+//DÉCRÉMENTATION DU STOCK
+	$resultats=$connexion->query("SELECT * FROM ligne_impression WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	while($ligne = $resultats->fetch())
+		modif_stock_poly($ligne->code_poly, -$ligne->quantite);
+//SUPPRESSION DES LIGNES
 	$resultats=$connexion->query("DELETE FROM ligne_impression WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
@@ -187,7 +233,4 @@ function articles_sans_code_barre(){
 	return $resultats;
 }
 
-function stock_poly($poly){
-	return 1000;
-}
 ?>

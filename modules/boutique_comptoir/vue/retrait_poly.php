@@ -27,18 +27,19 @@ include CHEMIN_VUE.'cartouche_etudiant.php';
 		while($ligne = $liste_retraits_possibles->fetch()){
 					$poly_non_retires = $ligne->qte_payee - $ligne->qte_retiree;
 					if ($poly_non_retires != 0) {
-						$stock_poly = stock_poly($ligne->codep);
 						 echo "<tr>";
 						 echo "<td>".$ligne->codep."</td>";
 						 echo "<td>".$ligne->qte_payee."</td>";
 						 echo "<td>".$ligne->qte_retiree."</td>";
 						 echo "<td>".$poly_non_retires."</td>";
-						 echo "<td>".$stock_poly."</td>";
-						if ($stock_poly <  $poly_non_retires) {
-								$retirable = 'value="'.$stock_poly.'" style="background-color: red"';	
+						 //echo "<td>".$stock_poly."</td>";
+						 echo "<td>".$ligne->stock_courant."</td>";
+						if ($ligne->stock_courant <  $poly_non_retires) {
+								$retirable = 'value="'.$ligne->stock_courant.'" style="background-color: red"';	
 						} else {
 								$retirable = 'value="'.$poly_non_retires.'"';
 						}
+//FIX ME : possibilité de retirer plus de poly que de  polys payés
 						 echo '<td><input type="text" name="code_poly_'.$ligne->codep.'" id="'.$ligne->codep.'" '.$retirable.' size="2"></td>';
 						 echo "</tr>";
 					}

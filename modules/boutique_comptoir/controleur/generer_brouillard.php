@@ -14,6 +14,7 @@ ini_set('display_errors', 1);
 
 //FIX ME : sécuriser la génération PDF
 require_once('../modele/brouillard_caisse.php');
+require_once('../../boutique_en_ligne/modele/boutique_en_ligne.php');
 require_once('../../../libs/tcpdf/config/lang/fra.php');
 require_once('../../../libs/tcpdf/tcpdf.php');
 
@@ -28,6 +29,9 @@ $liste_moneo = liste_paiements($_POST['date'], 'MONEO');
 $liste_paybox = liste_paiements($_POST['date'], 'PAYBOX'); 
 $liste_interne = liste_paiements($_POST['date'], 'INTERNE'); 
 $liste_cheque = liste_paiements($_POST['date'], 'CHEQUE'); 
+
+$sortie_stock = liste_retraits("",$_POST['date']);
+$entree_stock = liste_impressions($_POST['date']);
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -186,9 +190,9 @@ $liste_paiements_interne = '
 ';
 $pdf->writeHTML($liste_paiements_interne, true, false, false, false, '');
 
-
 $montant_sortie_stock=0;
-$liste_sortie_stock = '
+$liste_sortie_stock = 'test';
+/*$liste_sortie_stock = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
 	<CAPTION>Liste des sorties de stock</CAPTION><br>
 	<THEAD>
@@ -205,11 +209,33 @@ $liste_sortie_stock = '
 		        $liste_sortie_stock.="<td>".$montant_poly"</td>";
 		        $liste_sortie_stock.="</tr>";
 			}
-		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>
-';
+*/
+//		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>';
 $pdf->writeHTML($liste_sortie_stock, true, false, false, false, '');
 
-
+/*
+$montant_entree_stock=0;
+$liste_entree_stock = '
+<TABLE cellspacing="0" cellpadding="1" border="1">
+	<CAPTION>Liste des entrées de stock</CAPTION><br>
+	<THEAD>
+	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH><Quantité/TH> <TH>Montant</TH> </tr>		
+	</THEAD>
+		<tbody>';
+		    while($l = $entree_stock->fetch()){
+		        $liste_entree_stock.="<tr>";
+		        $liste_entree_stock.="<td>".$l->codep."</td>";
+		        $liste_entree_stock.="<td>".$l->prix."</td>";
+		        $liste_entree_stock.="<td>".$l->quantite."</td>";
+				$montant_poly = $l->prix*$l->quantite;
+				$motant_entree_stock = $montant_entree_stock + $montant_poly;
+		        $liste_entree_stock.="<td>".$montant_poly"</td>";
+		        $liste_entree_stock.="</tr>";
+			}
+		$liste_entree_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_entree_stock.' </td></tr></tfoot></table>
+';
+$pdf->writeHTML($liste_entree_stock, true, false, false, false, '');
+	*/
 // This method has several options, check the source code documentation for more information.
 $pdf->Output('example_001.pdf', 'I');
 ?>
