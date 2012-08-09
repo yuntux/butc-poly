@@ -13,6 +13,13 @@ function lister_poly($branche="", $type=""){
 	return $resultats;
 }
 
+function lister_uv(){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM uv") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 function detailler_utilisateur($num_badge="", $login=""){
 	global $connexion;
 	if ($num_badge != "") {
@@ -134,7 +141,10 @@ function ligne_impression($id_impression){
 
 function supprimer_impression($id_impression){
 	global $connexion;
-	$resultats=$connexion->query("DELETE entete_impression WHERE id=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+//FIX ME DELETE ON CASCADE => COMME ÇA C'EST SUPER CRADE !
+	$resultats=$connexion->query("DELETE FROM entete_impression WHERE id=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	$resultats=$connexion->query("DELETE FROM ligne_impression WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
