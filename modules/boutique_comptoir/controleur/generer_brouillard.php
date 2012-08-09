@@ -103,7 +103,7 @@ $totaux_paiements = <<<EOD
 	<td>$totaux_moneo->total_paiements</td>
 	</tr>
 	<tr>
-	<td>Articles gratuits</td>
+	<td>INTERNE</td>
 	<td>$totaux_interne->nb_paiements</td>
 	<td>$totaux_interne->total_paiements</td>
 	</tr>
@@ -174,7 +174,7 @@ $pdf->writeHTML($liste_paiements_cheque, true, false, false, false, '');
 
 $liste_paiements_interne = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
-	<CAPTION>Liste des paiements INETERNE</CAPTION><br>
+	<CAPTION>Liste des paiements INTERNE</CAPTION><br>
 	<THEAD>
 	<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
 	</THEAD>
@@ -189,10 +189,9 @@ $liste_paiements_interne = '
 		$liste_paiements_interne.='</tbody></table>
 ';
 $pdf->writeHTML($liste_paiements_interne, true, false, false, false, '');
-
+/*
 $montant_sortie_stock=0;
-$liste_sortie_stock = 'test';
-/*$liste_sortie_stock = '
+$liste_sortie_stock = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
 	<CAPTION>Liste des sorties de stock</CAPTION><br>
 	<THEAD>
@@ -209,11 +208,11 @@ $liste_sortie_stock = 'test';
 		        $liste_sortie_stock.="<td>".$montant_poly"</td>";
 		        $liste_sortie_stock.="</tr>";
 			}
-*/
-//		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>';
-$pdf->writeHTML($liste_sortie_stock, true, false, false, false, '');
 
-/*
+		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>';
+$pdf->writeHTML($liste_sortie_stock, true, false, false, false, '');
+*/
+
 $montant_entree_stock=0;
 $liste_entree_stock = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
@@ -221,8 +220,8 @@ $liste_entree_stock = '
 	<THEAD>
 	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH><Quantité/TH> <TH>Montant</TH> </tr>		
 	</THEAD>
-		<tbody>';
-		    while($l = $entree_stock->fetch()){
+		<tbody><tr><td>test</td></tr></tbody></table>';
+/*		    while($l = $entree_stock->fetch()){
 		        $liste_entree_stock.="<tr>";
 		        $liste_entree_stock.="<td>".$l->codep."</td>";
 		        $liste_entree_stock.="<td>".$l->prix."</td>";
@@ -232,10 +231,11 @@ $liste_entree_stock = '
 		        $liste_entree_stock.="<td>".$montant_poly"</td>";
 		        $liste_entree_stock.="</tr>";
 			}
-		$liste_entree_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_entree_stock.' </td></tr></tfoot></table>
-';
+*/
+//		$liste_entree_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_entree_stock.' </td></tr></tfoot></table>';
+
 $pdf->writeHTML($liste_entree_stock, true, false, false, false, '');
-	*/
+
 // This method has several options, check the source code documentation for more information.
 $pdf->Output('example_001.pdf', 'I');
 ?>

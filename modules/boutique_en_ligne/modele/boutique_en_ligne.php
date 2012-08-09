@@ -57,7 +57,14 @@ function detailler_utilisateur($num_badge="", $login=""){
 
 function detailler_poly($code){
 	global $connexion;
-	$resultats=$connexion->query("SELECT * FROM poly WHERE code_barre=".$connexion->quote($code, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("SELECT * FROM poly INNER JOIN uv ON uv.code=poly.id_uv WHERE code_barre=".$connexion->quote($code, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function enregistrer_devenir_poly($code_poly, $devenir_poly, $login){
+	global $connexion;
+	$resultats=$connexion->query("UPDATE poly SET date_heure_devenir= NOW(), devenir_fin_semestre=".$connexion->quote($devenir_poly, PDO::PARAM_STR)." , login_devenir=".$connexion->quote($login, PDO::PARAM_STR)." WHERE code_barre = ".$connexion->quote($code_poly, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
@@ -76,9 +83,9 @@ function enregistrer_ligne_commande($id_entete_commande, $poly, $quantite){
 	return $resultats;
 }
 
-function enregistrer_entete_retrait($id, $login_acheteur, $login_vendeur){
+function enregistrer_entete_retrait($id, $login_acheteur, $login_vendeur, $duree_retrait){
 	global $connexion;
-	$resultats=$connexion->query("INSERT INTO entete_retrait(id, login_acheteur, login_vendeur, date_heure_retrait) VALUES (".$connexion->quote($id, PDO::PARAM_STR).",".$connexion->quote($login_acheteur, PDO::PARAM_STR).",".$connexion->quote($login_vendeur, PDO::PARAM_STR).",NOW())") or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("INSERT INTO entete_retrait(id, login_acheteur, login_vendeur, date_heure_retrait, duree_retrait) VALUES (".$connexion->quote($id, PDO::PARAM_STR).",".$connexion->quote($login_acheteur, PDO::PARAM_STR).",".$connexion->quote($login_vendeur, PDO::PARAM_STR).",NOW() ,".$connexion->quote($duree_retrait, PDO::PARAM_STR).")") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }

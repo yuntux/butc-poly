@@ -27,7 +27,8 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 									}
 								}
 								if ($enregistrer_une_entete)
-									enregistrer_entete_retrait($id_retrait, $_SESSION['etudiant_en_cours']['login'], $_SESSION['login']);
+									$duree_retrait = time() - $_SESSION['etudiant_en_cours']['debut_session'];
+									enregistrer_entete_retrait($id_retrait, $_SESSION['etudiant_en_cours']['login'], $_SESSION['login'], $duree_retrait);
 								header('Location: index.php?module=boutique_comptoir&action=changer_etudiant&action_post_changement=retirer_poly');
 							} else {
 								$liste_retraits_possibles = liste_retraits_possibles($_SESSION['etudiant_en_cours']['login']);

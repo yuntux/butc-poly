@@ -33,25 +33,37 @@ echo'
 <div class="groupe" id="liste_poly">
 	<h3>Saisie des polys</h3>
 	<form name="ajouter_poly" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post" autocomplete="off">
-	<input type="text" name="code_poly" id="code_poly" value="" onkeyup="test_longueur_code_poly(); ">';
-if (ENVIRONNEMENT_DEMO) echo 'CODE BARRE DU POLY DE DEMO : LB24C1P12';
+	<SELECT name="articles_sans_code_barre" onchange="selection_article_sans_code_barre(this)">';
+		echo '<OPTION VALUE="--">--Articles sans code barre--</OPTION>';
+		while($article = $articles_sans_code_barre->fetch())
+			echo'<OPTION VALUE="'.$article->code_barre.'">'.$article->designation.' ('.$article->code_barre.')</OPTION>';
+	echo'	</SELECT>
+	<br>
+	Saisir le code barre : <input type="text" name="code_poly" id="code_poly" value="" onkeyup="test_longueur_code_poly(); ">
+	<br>Appuyer sur la touche TABulation du clavier pour passer directement à la zome de saisie des références du moyen de paiement.';
+if (ENVIRONNEMENT_DEMO) echo '<br>CODE BARRE DU POLY DE DEMO : LB24C1P12';
 if (isset($message_erreur)) echo '<strong>'.$message_erreur.'</strong>';
-echo '<br>';
-echo '	<SELECT name="articles_sans_code_barre" onchange="selection_article_sans_code_barre(this)">';
-			echo '<OPTION VALUE="--">--Articles sans code barre--</OPTION>';
-			while($article = $articles_sans_code_barre->fetch())
-				echo'<OPTION VALUE="'.$article->code_barre.'">'.$article->designation.' ('.$article->code_barre.')</OPTION>';
-echo'	</SELECT>
-
+echo '<br>
 	</form>
 </div>
 </div>
 
 <div style="float: right;width:57%;">
 <div class="groupe" id="panier" autocomplete="on">
-<form name="modif_panier" action="index.php?module=boutique_comptoir&action=vendre_poly" method="post">
+<h2>Panier</h2>';
+
+	// FIXME : liste d'auto complétion modifiable (si le porteur n'est pas de l'UTC ex : un parent) si modification du porteur
+	echo '
+	<form name="modif_panier" action="index.php?module=boutique_comptoir&action=paiement_comptoir" method="post">
+	<br>
+	Références du moyen de paiement : <input type="text" name="references_moyen_paiement" id="references_moyen_paiement" value="" size="50"><br>Vide si Monéo, N°Cheque+N°Compte+Banque si chèque, N° de carte si CB
+	<br>
+	Propriétaire du moyen de paiement : <input type="text" name="proprietaire_moyen_paiement" id="proprietaire_moyen_paiement" value="'.$_SESSION['etudiant_en_cours']['prenom'].' '.$_SESSION['etudiant_en_cours']['nom'].'" size="50">
+<br><br>
+';
+
+echo'
 <TABLE id="pannier">
-	<CAPTION>Panier</CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>
 	</THEAD>
@@ -84,27 +96,20 @@ echo'	</SELECT>
 			<TFOOT>
 				<TR><td colspan="5">Total : '.$total_panier.'</td></TR>
 			</TFOOT>';
+
 	   }
 	}
 
 echo '
-</TABLE>
-</form>';
-
+</TABLE>';
 if ($total_panier > 0) {
-	// FIXME : liste d'auto complétion modifiable (si le porteur n'est pas de l'UTC ex : un parent) si modification du porteur
-	echo '
-	<form name="modif_panier" action="index.php?module=boutique_comptoir&action=paiement_comptoir" method="post">
-	Propriétaire du moyen de paiement : <input type="text" name="proprietaire_moyen_paiement" id="proprietaire_moyen_paiement" value="'.$_SESSION['etudiant_en_cours']['prenom'].' '.$_SESSION['etudiant_en_cours']['nom'].'" size="50"><br>
-	Références du moyen de paiement : <input type="text" name="references_moyen_paiement" id="references_moyen_paiement" value="" size="50"><br>Vide si Monéo, N°Cheque+N°Compte+Banque si chèque, N° de carte si CB
-<br>
-	<input type="submit" id="payer_cb" name="payer_cb" value="PAIEMENT CB [F9]" class="btn_valider">
+	echo '<br>Ne pas valider le paiement avant que l\'étudiant aie quitté le comptoir sinon ça fausse les statistiques !<br><input type="submit" id="payer_cb" name="payer_cb" value="PAIEMENT CB [F9]" class="btn_valider">
 	<input type="submit" id="payer_moneo" name="payer_moneo" value="PAIEMENT MONEO [F10]" class="btn_valider">
-	<input type="submit" id="payer_cheque" name="payer_cheque" value="PAIEMENT CHEQUE [F11]" class="btn_valider">
-';
+	<input type="submit" id="payer_cheque" name="payer_cheque" value="PAIEMENT CHEQUE [F11]" class="btn_valider">';
 	if ($_SESSION['etudiant_en_cours']['formation_continue'])
-		echo '<input type="submit" id="vente_interne" name="vente_interne" value="VENTE INTERNE [F12]" class="btn_valider">';
-	echo '</FORM>';
+		echo '<input type="submit" id="vente_interne" name="vente_interne" value="VENTE INTERNE [F12]" class="btn_valider">
+		</FORM>';
 }
+
 echo'</div></div>';
 ?>

@@ -13,7 +13,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	else
 		$login = $_SESSION['login'];
 
-	$retraits_possibles = liste_retraits_possibles($login);
+	$liste_retraits_possibles = liste_retraits_possibles($login);
 	$liste_commandes = liste_commandes($login);
 	$liste_retraits = liste_retraits($login);
 

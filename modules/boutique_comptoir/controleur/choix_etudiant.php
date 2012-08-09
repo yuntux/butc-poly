@@ -22,6 +22,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 						$_SESSION['etudiant_en_cours']['nom'] = $detail_etudiant->nom;
 						$_SESSION['etudiant_en_cours']['prenom'] = $detail_etudiant->prenom1;
 						$_SESSION['etudiant_en_cours']['formation_continue'] = $detail_etudiant->formation_continue;
+						$_SESSION['etudiant_en_cours']['debut_session'] = time();
 						creationPanier();
 						//redirection vers la cible
 						header('Location: index.php?module=boutique_comptoir&action='.$_GET['action_post_choix']);

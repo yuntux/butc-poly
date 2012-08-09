@@ -30,7 +30,8 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 							enregistrer_paiement($_SESSION['panier']['reference'], 'INTERNE', $_POST['proprietaire_moyen_paiement'], $_POST['references_moyen_paiement']);
 
 						//on enregistre le retrait
-						enregistrer_entete_retrait($_SESSION['panier']['reference'], $_SESSION['etudiant_en_cours']['login'], $_SESSION['login']);
+						$duree_retrait = time() - $_SESSION['etudiant_en_cours']['debut_session'];
+						enregistrer_entete_retrait($_SESSION['panier']['reference'], $_SESSION['etudiant_en_cours']['login'], $_SESSION['login'], $duree_retrait);
 						for ($i=0 ;$i < CompterArticles() ; $i++)
 							enregistrer_ligne_retrait($_SESSION['panier']['reference'], $_SESSION['panier']['libelleProduit'][$i], $_SESSION['panier']['qteProduit'][$i]);
 						header('Location: index.php?module=boutique_comptoir&action=changer_etudiant&action_post_changement=vendre_poly');

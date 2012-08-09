@@ -1,7 +1,7 @@
 <?php
-//	phpCAS::forceAuthentication();
-//	$login = phpCAS::getUser();
-	$login='adumaine';
+	phpCAS::forceAuthentication();
+	$login = phpCAS::getUser();
+//	$login='adumaine';
 	include_once 'modules/boutique_en_ligne/modele/boutique_en_ligne.php';
 	$detail_utilisateur = detailler_utilisateur("", $login)->fetch();
 	if ($detail_utilisateur->login != ""){

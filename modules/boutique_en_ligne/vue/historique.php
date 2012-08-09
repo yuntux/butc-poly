@@ -4,24 +4,23 @@ echo '<h1>Hisorique de '.$login.'</h1>';
 
 echo '<h2>Synthèse</h2>
 <TABLE>
-    <THEAD>
-        <TR><TH>Code</TH> <TH>Payés</TH> <TH>Retirés</TH> <TH>À retirer</TH> <TH>Stock</TH></TR>
-    </THEAD>
-    <TBODY>';
+	<THEAD>
+		<TR><TH>Code</TH> <TH>Payés</TH> <TH>Retirés</TH> <TH>À retirer</TH> <TH>Stock</TH> </TR>
+	</THEAD>
+	<TBODY>';
 
-        while($ligne = $retraits_possibles->fetch()){
-                    $poly_non_retires = $ligne->qte_payee - $ligne->qte_retiree;
-                    if ($poly_non_retires != 0) {
-                        $stock_poly = stock_poly($ligne->codep);
-                         echo "<tr>";
-                         echo "<td>".$ligne->codep."</td>";
-                         echo "<td>".$ligne->qte_payee."</td>";
-                         echo "<td>".$ligne->qte_retiree."</td>";
-                         echo "<td>".$poly_non_retires."</td>";
-                         echo "<td>".$stock_poly."</td>";
-                         echo "</tr>";
-                    }
-        }
+		while($ligne = $liste_retraits_possibles->fetch()){
+					$poly_non_retires = $ligne->qte_payee - $ligne->qte_retiree;
+					if ($poly_non_retires != 0) {
+						 echo "<tr>";
+						 echo "<td>".$ligne->codep."</td>";
+						 echo "<td>".$ligne->qte_payee."</td>";
+						 echo "<td>".$ligne->qte_retiree."</td>";
+						 echo "<td>".$poly_non_retires."</td>";
+						 echo "<td>".$ligne->stock_courant."</td>";
+						 echo "</tr>";
+					}
+		}
     echo '</TBODY> 
 </TABLE>';
 
