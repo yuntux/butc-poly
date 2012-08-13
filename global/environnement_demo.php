@@ -31,15 +31,6 @@
 			$_SESSION['enseignant'] = 1;
 	}
 
-	echo 'ENVIRONNEMENT DE DEMO ';
-
-	echo '<a href="index.php?profil_demo=acheteur" >Profil acheteur</a> ';
-	echo '<a href="index.php?profil_demo=enseignant">Profil enseignant</a> ';
-	echo '<a href="index.php?profil_demo=imprimeur">Profil imprimeur</a> ';
-	echo '<a href="index.php?profil_demo=vendeur">Profil vendeur</a> ';
-	echo '<a href="index.php?profil_demo=regisseur">Profil régisseur</a> ';
-	echo '<a href="index.php?profil_demo=admin">Profil admin</a>';
-
 	//Identifiants paybox de démo
 /*	define('PBX_SITE', 1999888);
 	define('PBX_RANG', 99);

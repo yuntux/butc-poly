@@ -1,4 +1,6 @@
 <?php
+require_once('../../../global/init.php');
+/*
 require_once('../../../global/config.php');
 ini_set('display_errors', 1);
 
@@ -11,7 +13,7 @@ ini_set('display_errors', 1);
 		print "Erreur ! : " . $e->getMessage();
 		die();
 	}
-
+*/
 //FIX ME : sécuriser la génération PDF
 require_once('../modele/brouillard_caisse.php');
 require_once('../../boutique_en_ligne/modele/boutique_en_ligne.php');

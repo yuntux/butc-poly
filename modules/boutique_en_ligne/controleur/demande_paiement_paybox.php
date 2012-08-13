@@ -13,10 +13,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 		//on enregistre la commande en base
 		enregistrer_entete_commande($_SESSION['panier']['reference'], $_SESSION['login'], $_SESSION['login']);
 		for ($i=0 ;$i < CompterArticles() ; $i++)
-		{
 			enregistrer_ligne_commande($_SESSION['panier']['reference'], $_SESSION['panier']['libelleProduit'][$i], $_SESSION['panier']['qteProduit'][$i]);
-		}
-
 
 		//on génère les paramètres du paiement paybox
 		if (!$fp = fopen(FICHIERS_PAYBOX.$_SESSION['panier']['reference'],"w+")) {

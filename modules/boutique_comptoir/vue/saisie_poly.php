@@ -50,12 +50,11 @@ echo '<br>
 
 <div style="float: right;width:57%;">
 <div class="groupe" id="panier" autocomplete="on">
-<h2>Panier</h2>';
+<h3>Panier</h3>';
 
 	// FIXME : liste d'auto complétion modifiable (si le porteur n'est pas de l'UTC ex : un parent) si modification du porteur
 	echo '
 	<form name="modif_panier" action="index.php?module=boutique_comptoir&action=paiement_comptoir" method="post">
-	<br>
 	Références du moyen de paiement : <input type="text" name="references_moyen_paiement" id="references_moyen_paiement" value="" size="50"><br>Vide si Monéo, N°Cheque+N°Compte+Banque si chèque, N° de carte si CB
 	<br>
 	Propriétaire du moyen de paiement : <input type="text" name="proprietaire_moyen_paiement" id="proprietaire_moyen_paiement" value="'.$_SESSION['etudiant_en_cours']['prenom'].' '.$_SESSION['etudiant_en_cours']['nom'].'" size="50">

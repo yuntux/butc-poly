@@ -1,11 +1,13 @@
 <?php
 
+include_once('config.php');
+
 //on affiche pas les erreurs php lorsqu'on est en prod !
 ini_set('display_errors', 0);
 
 // Désactivation des guillemets magiques
 ini_set('magic_quotes_runtime', 0);
-ini_set ("magic_quotes_runtime", 0);
+
 if (1 == get_magic_quotes_gpc())
 {
 	function remove_magic_quotes_gpc(&$value) {

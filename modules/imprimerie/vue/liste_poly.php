@@ -21,6 +21,6 @@ echo '<h1>Liste des polys</h1>
 		}
 		echo '</TBODY></TABLE>';
 
-echo '<br><a href="">Envoyer les mails de gestion des invendus en fin de semestre aux responsables d\'UV.</a>';
-echo '<br><a href="">Envoyer les mails de rappels des polys payés mais non retirés aux étudiants.</a>';
+echo '<br><a href="mail_devenir_poly">Envoyer les mails de gestion des invendus en fin de semestre aux responsables d\'UV.</a>';
+echo '<br><a href="mail_poly_non_retires">Envoyer les mails de rappels des polys payés mais non retirés aux étudiants.</a>';
 ?>

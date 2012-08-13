@@ -14,17 +14,6 @@ FROM
 	return $resultats->fetch();
 }
 
-function montant_commande($id_commande){
-	global $connexion;
-	$resultats=$connexion->query(
-"SELECT ec.id AS id_commande, SUM(p.prix*lc.quantite) AS montant_commande
-FROM entete_commande ec, ligne_commande lc
-		INNER JOIN poly p ON p.code_barre=lc.code_poly
-WHERE lc.id_entete_commande=ec.id AND ec.id= ".$connexion->quote($id_commande, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
-	$resultats->setFetchMode(PDO::FETCH_OBJ);
-	return $resultats;
-}
-
 function liste_paiements($date, $moyen_paiement){
 	global $connexion;
 	$resultats=$connexion->query(

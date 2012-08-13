@@ -12,6 +12,7 @@ function lister_poly($branche="", $type=""){
 		SELECT *, (qte_commandee-qte_retiree) AS reste_a_retirer
 		FROM poly
 				LEFT OUTER JOIN uv ON uv.code=poly.id_uv
+				LEFT OUTER JOIN utilisateur ON uv.id_responsable=utilisateur.login
 				LEFT OUTER JOIN (SELECT lr.code_poly AS cpr, SUM(lr.quantite) AS qte_retiree
 								FROM ligne_retrait lr
 								GROUP BY cpr) AS retraits ON retraits.cpr=poly.code_barre
@@ -138,6 +139,24 @@ function liste_commandes($login){
 	return $resultats;
 }
 
+function montant_commande($id_commande){
+	global $connexion;
+	$resultats=$connexion->query(
+"SELECT ec.id AS id_commande, SUM(p.prix*lc.quantite) AS montant_commande
+FROM entete_commande ec, ligne_commande lc
+		INNER JOIN poly p ON p.code_barre=lc.code_poly
+WHERE lc.id_entete_commande=ec.id AND ec.id= ".$connexion->quote($id_commande, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function entete_commande($id){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM entete_commande WHERE id=".$connexion->quote($id, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 function ligne_commande($id_commande){
 	global $connexion;
 	$resultats=$connexion->query("SELECT * FROM ligne_commande INNER JOIN poly ON code_poly=poly.code_barre WHERE id_entete_commande=".$connexion->quote($id_commande, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
@@ -202,6 +221,12 @@ function supprimer_impression($id_impression){
 	return $resultats;
 }
 
+function liste_utilisateurs(){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM utilisateur WHERE acheteur=1") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
 
 function utilisateur_formation_continue(){
 	global $connexion;

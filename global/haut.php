@@ -33,6 +33,19 @@ Released   : 20090918
 </head>
 <body>
 
+<?php
+if (ENVIRONNEMENT_DEMO) {
+	echo 'ENVIRONNEMENT DE DEMO ';
+
+	echo '<a href="index.php?profil_demo=acheteur" >Profil acheteur</a> ';
+	echo '<a href="index.php?profil_demo=enseignant">Profil enseignant</a> ';
+	echo '<a href="index.php?profil_demo=imprimeur">Profil imprimeur</a> ';
+	echo '<a href="index.php?profil_demo=vendeur">Profil vendeur</a> ';
+	echo '<a href="index.php?profil_demo=regisseur">Profil régisseur</a> ';
+	echo '<a href="index.php?profil_demo=admin">Profil admin</a>';
+}
+?>
+
 <h1>BUTC - Vente en ligne des polycopiés</h1>
 
 <div class="left">	

@@ -26,6 +26,10 @@ define('ENVIRONNEMENT_DEMO', 1);
 define('LONGUEUR_NUM_CARTE_ETU', '5');
 define('LONGUEUR_CODE_POLY', '9');
 
+//CONTACT BUTC
+define('EMAIL_CONTACT_BUTC', 'butc@utc.fr');
+define('VENDEUR_BUTC', 'Franck HETRUS - Poste 4094 ');
+
 //Paramètres PAYBOX
 //define('IP_SERVEUR_BUTC', '172.25.12.239');
 define('IP_SERVEUR_BUTC', '80.67.175.138');

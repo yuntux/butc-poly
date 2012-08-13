@@ -1,16 +1,21 @@
 <?php
 $date = date("d-m-Y");
 $heure = date("H:i");
-$monfichier = fopen('logs_paybox.txt', 'a+');
 $monUrl = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+$ref_paybox = $_GET['ref'];
+$montant_paybox = $_GET['montant'];
 $errors = '';
 $unauthorized_server = true;
 $pbk_ok = false;
 $sign_ok = false;
+
+
+//LOG DE LA REQUETTE
+$monfichier = fopen('logs_paybox.txt', 'a+');
 fputs($monfichier, '___'.$date.'::'.$heure.'::'.$monUrl.' \n'); // On écrit le nouveau nombre de pages vues
 fclose($monfichier);
 
-/*
+
 //ip verification when using url http
 if($monUrl){
 	$authorized_ips = array('195.101.99.76','194.2.122.158','62.39.109.166','194.50.38.6');
@@ -24,9 +29,22 @@ if($monUrl){
 	if($unauthorized_server)
 		$errors.='Unauthorized server : '.$_SERVER['REMOTE_ADDR'];
 }
-*/
 
-include('/var/www/code/libs/fonctions-paybox.php');
+
+if(!$unauthorized_server) {
+	include('../modules/boutique_en_ligne/modele/boutique_en_ligne.php');
+	include('../../global/init.php');
+
+	$montant_commande = montant_commande($ref_paybox)->fetch(); 
+	//SI LE SERVEUR AYANT ENVOYÉ L'URI ET LE MONTANT SONT OK ON ENREGISTRE LE PAIEMENT VALDIE
+	if ($montant_commande->montant_commande*100 == $montant_paybox) //montant de retour paybox exprimé en centimes
+		enregistrer_paiement($ref_paybox, 'PAYBOX', '', $_SERVER['REQUEST_URI']);	
+	//SI LE SERVEUR AYANT ENVOYÉ L'URI MAIS MAUVAIS MONTANT ON ENREGISTRE LE PAIEMENT en invalide
+	else
+		enregistrer_paiement($ref_paybox, '', '', $_SERVER['REQUEST_URI']);	
+}
+
+/*include('/var/www/code/libs/fonctions-paybox.php');
 echo PbxVerSign( $_POST['signeddata'], 'pubkey.pem', monUrl);
 
 
@@ -61,7 +79,7 @@ while ($msg = openssl_error_string()) echo $msg . "<br />\n";
 		else{
 			$sign_ok = true;
 		}
-*/
+
 
 	//transaction result
 $f = fopen('logs_verif.txt', 'a+'); 
@@ -71,7 +89,7 @@ else
 	fputs($f, "VERIF :  KO");
 fclose($f);
 
-/*
+
 	$pbx_error = $vars['pbx_error'];
 	
 	switch($pbx_error)
