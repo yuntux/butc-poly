@@ -4,7 +4,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
     include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 
 } else {
-	if(isset($_SESSION['vendeur']) && $_SESSION['vendeur']==1) {
+	if(isset($_SESSION['imprimeur']) && $_SESSION['imprimeur']==1) {
 
 		include_once 'modules/boutique_en_ligne/modele/boutique_en_ligne.php';
 
@@ -24,14 +24,14 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 		<br><br>Attention, sans réponse de votre part <b>les polycopiés restants seront remis en vente au prochain semestre</b>.
 		<br><br>Dans tous les cas, contactez Monsieur Piredda de l\'imprimerie pour toute demande de polycopié (retirage ou nouvelle édition).
 		<br><br><br>Cordialement.
-		<br>br>'.VENDEUR_BUTC.'</body>';
+		<br><br>'.VENDEUR_BUTC.'</body>';
 
-				echo $message.'<br><br>'$utilisateur->email.'<br>====================================================';
+				echo $message.'<br><br>'.$ligne->email.'<br>====================================================<br>';
 
 				if(mail($ligne->email, 'BUTC : polycopiés '.$ligne->code_barre.' invendu(s)', $message, $headers)) 
-					//Le message a bien été envoyé.
+					echo '<br>Le mail a été envoyé.<br>';
 				else 
-					echo 'Le message n\'a pu être envoyé'; 
+					echo '<br>Le message n\'a pu être envoyé.<br>'; 
 			}
 		}
 

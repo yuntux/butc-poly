@@ -126,7 +126,7 @@ FROM entete_commande ec
 						INNER JOIN ligne_retrait lr ON er.id=lr.id_entete_retrait
 						WHERE er.login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)."
 						GROUP BY cpr) AS retraits ON retraits.cpr=lc.code_poly
-WHERE ec.date_heure_paiement IS NOT NULL AND ec.login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)."
+WHERE ec.date_heure_paiement IS NOT NULL AND mode_paiement IS NOT NULL AND ec.login_acheteur=".$connexion->quote($login, PDO::PARAM_STR)."
 GROUP BY codep") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;

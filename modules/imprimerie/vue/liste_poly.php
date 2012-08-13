@@ -16,11 +16,11 @@ echo '<h1>Liste des polys</h1>
 			echo "<td>".$ligne->qte_retiree."</td>";
 			echo "<td>".$ligne->reste_a_retirer."</td>";
 			echo "<td>".$ligne->stock_courant."</td>";
-			echo "<td><a href="">Voir la fiche</a></td>";
+			echo "<td><a href=index.php?module=imprimerie&action=detail_poly&id_poly=".$ligne->code_barre.">Voir la fiche</a></td>";
             echo "</tr>";
 		}
 		echo '</TBODY></TABLE>';
 
-echo '<br><a href="mail_devenir_poly">Envoyer les mails de gestion des invendus en fin de semestre aux responsables d\'UV.</a>';
-echo '<br><a href="mail_poly_non_retires">Envoyer les mails de rappels des polys payés mais non retirés aux étudiants.</a>';
+echo '<br><a href="index.php?module=imprimerie&action=mail_devenir_poly">Envoyer les mails de gestion des invendus en fin de semestre aux responsables d\'UV.</a>';
+echo '<br><a href="index.php?module=imprimerie&action=mail_poly_non_retires">Envoyer les mails de rappels des polys payés mais non retirés aux étudiants.</a>';
 ?>
