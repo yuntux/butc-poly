@@ -63,6 +63,27 @@ function detailler_poly($code){
 	return $resultats;
 }
 
+function detailler_ligne_commande($code){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_commande INNER JOIN entete_commande ON entete_commande.id=ligne_commande.id_entete_commande WHERE code_poly=".$connexion->quote($code, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function detailler_ligne_retrait($code){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_retrait INNER JOIN entete_retrait ON entete_retrait.id=ligne_retrait.id_entete_retrait WHERE code_poly=".$connexion->quote($code, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
+function detailler_ligne_impression($code){
+	global $connexion;
+	$resultats=$connexion->query("SELECT * FROM ligne_impression INNER JOIN entete_impression ON entete_impression.id=ligne_impression.id_entete_impression WHERE code_poly=".$connexion->quote($code, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 function enregistrer_devenir_poly($code_poly, $devenir_poly, $login){
 	global $connexion;
 	$resultats=$connexion->query("UPDATE poly SET date_heure_devenir= NOW(), devenir_fin_semestre=".$connexion->quote($devenir_poly, PDO::PARAM_STR)." , login_devenir=".$connexion->quote($login, PDO::PARAM_STR)." WHERE code_barre = ".$connexion->quote($code_poly, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));

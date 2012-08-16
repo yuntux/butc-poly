@@ -20,7 +20,7 @@ include CHEMIN_VUE.'cartouche_etudiant.php';
 <TABLE id="bon_retrait">
 	<CAPTION>Bon de retrait</CAPTION>
 	<THEAD>
-		<TR><TH>Code</TH> <TH>Payés</TH> <TH>Retirés</TH> <TH>À retirer</TH> <TH>Stock</TH> <TH>Retrait</TH></TR>
+		<TR><TH>Code</TH> <TH>Payés par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Retirés par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Retirables par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Stock</TH> <TH>Retrait</TH></TR>
 	</THEAD>
 	<TBODY>';
 

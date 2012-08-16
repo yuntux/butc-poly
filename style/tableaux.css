@@ -47,3 +47,33 @@ text-align:left;
 caption {
 font-family:sans-serif;
 }
+
+/*
+#footer
+{
+position: absolute;
+bottom: 0;
+margin: auto;
+clear: both;
+}
+			html, body {
+				height: 100%;
+overflow:auto;
+	padding-bottom: 20px;
+min-height: 100%;
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+				font: 12px/1.5 verdana, arial, helvetica, sans-serif;
+			}
+*/
+
+#footer {
+	position: relative;
+	margin-top: -20px; /* negative value of footer height */
+	width:100%;
+	text-align:center;
+	height: 20px;
+	clear:both;} 

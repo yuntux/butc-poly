@@ -16,7 +16,7 @@ echo '<h1>Liste des polys</h1>
 			echo "<td>".$ligne->qte_retiree."</td>";
 			echo "<td>".$ligne->reste_a_retirer."</td>";
 			echo "<td>".$ligne->stock_courant."</td>";
-			echo "<td><a href=index.php?module=imprimerie&action=detail_poly&id_poly=".$ligne->code_barre.">Voir la fiche</a></td>";
+			echo "<td><a href=index.php?module=imprimerie&action=detail_poly&code_poly=".$ligne->code_barre.">Voir la fiche</a></td>";
             echo "</tr>";
 		}
 		echo '</TBODY></TABLE>';
