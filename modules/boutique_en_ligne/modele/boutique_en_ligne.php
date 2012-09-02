@@ -194,6 +194,7 @@ function liste_retraits($login="", $date=""){
 SELECT *
 FROM entete_retrait
 	INNER JOIN ligne_retrait ON ligne_retrait.id_entete_retrait=entete_retrait.id
+	INNER JOIN poly ON code_poly=code_barre
 WHERE DATE(date_heure_retrait)=".$connexion->quote($date, PDO::PARAM_STR)." GROUP BY code_poly") or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
@@ -214,6 +215,7 @@ function liste_impressions($date=""){
 			SELECT *
 			FROM entete_impression
 				INNER JOIN ligne_impression ON ligne_impression.id_entete_impression=entete_impression.id
+				INNER JOIN poly ON code_poly=code_barre
 			WHERE DATE(date_heure_impression)=".$connexion->quote($date, PDO::PARAM_STR)." GROUP BY code_poly") or die(print_r($connexion->errorInfo()));
 
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
@@ -222,7 +224,7 @@ function liste_impressions($date=""){
 
 function ligne_impression($id_impression){
 	global $connexion;
-	$resultats=$connexion->query("SELECT * FROM ligne_impression WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
+	$resultats=$connexion->query("SELECT * FROM ligne_impression INNER JOIN poly ON code_poly=code_barre WHERE id_entete_impression=".$connexion->quote($id_impression, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }

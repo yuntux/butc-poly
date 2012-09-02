@@ -15,7 +15,7 @@ ini_set('display_errors', 1);
 
 //FIX ME : sécuriser les génération pdf
 //if(isset($_SESSION['vendeur']) && $_SESSION['vendeur']==1)
-	require_once('../../boutique_en_ligne/modele/boutique_en_ligne.php');
+require_once('../../boutique_en_ligne/modele/boutique_en_ligne.php');
 require_once('../../../libs/tcpdf/config/lang/fra.php');
 require_once('../../../libs/tcpdf/tcpdf.php');
 
@@ -23,14 +23,14 @@ require_once('../../../libs/tcpdf/tcpdf.php');
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 // set document information
-$pdf->SetCreator(PDF_CREATOR);
+//$pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('BUTC');
 $pdf->SetTitle('Facture vente interne');
 $pdf->SetSubject('Formation continue');
 $pdf->SetKeywords('');
 
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 048', PDF_HEADER_STRING);
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "BUTC - Facture interne", "Formation continue");
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -66,12 +66,13 @@ $pdf->SetFont('helvetica', '', 8);
 // -----------------------------------------------------------------------------
 
 // Set some content to print
+$html = "Date : ".date("d/m/Y")."<BR>";
+
 if (isset($_GET['utilisateur'])){
     $vente_interne_utilisateur = vente_interne_utilisateur($_GET['utilisateur']);
 	$detail_utilisateur = detailler_utilisateur("", $_GET['utilisateur'])->fetch();
-	$html='Étudiant : '.$detail_utilisateur->prenom1.' '.$detail_utilisateur->nom.'<br><br>';
+	$html.='Étudiant : '.$detail_utilisateur->prenom1.' '.$detail_utilisateur->nom.'<br><br>';
 }else{
-	$html="";
     $vente_interne_utilisateur = vente_interne_utilisateur();
 }
 
@@ -99,5 +100,5 @@ if (isset($_GET['utilisateur'])){
 $pdf->writeHTML($html, true, false, false, false, '');
 
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('facture_interne'.$detail_utilisateur->prenom1.' '.$detail_utilisateur->nom.'pdf', 'I');
 ?>

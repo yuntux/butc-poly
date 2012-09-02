@@ -1,6 +1,5 @@
 <?php
-require_once('../../../global/init.php');
-/*
+
 require_once('../../../global/config.php');
 ini_set('display_errors', 1);
 
@@ -13,7 +12,7 @@ ini_set('display_errors', 1);
 		print "Erreur ! : " . $e->getMessage();
 		die();
 	}
-*/
+
 //FIX ME : sécuriser la génération PDF
 require_once('../modele/brouillard_caisse.php');
 require_once('../../boutique_en_ligne/modele/boutique_en_ligne.php');
@@ -46,7 +45,7 @@ $pdf->SetSubject('Régie UTC');
 $pdf->SetKeywords('');
 
 // set default header data
-$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE.' 048', PDF_HEADER_STRING);
+$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "BUTC - Guichet BF", "Brouillard de caisse du ".date("d m Y"));
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -71,12 +70,8 @@ $pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 
-// set font
-$pdf->SetFont('helvetica', 'B', 20);
-
 // add a page
 $pdf->AddPage();
-
 $pdf->SetFont('helvetica', '', 8);
 
 // -----------------------------------------------------------------------------
@@ -191,53 +186,53 @@ $liste_paiements_interne = '
 		$liste_paiements_interne.='</tbody></table>
 ';
 $pdf->writeHTML($liste_paiements_interne, true, false, false, false, '');
-/*
+
 $montant_sortie_stock=0;
 $liste_sortie_stock = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
 	<CAPTION>Liste des sorties de stock</CAPTION><br>
 	<THEAD>
-	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH><Quantité/TH> <TH>Montant</TH> </tr>		
+	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH>Quantité</TH> <TH>Montant</TH> </tr>		
 	</THEAD>
 		<tbody>';
 		    while($l = $sortie_stock->fetch()){
 		        $liste_sortie_stock.="<tr>";
-		        $liste_sortie_stock.="<td>".$l->codep."</td>";
+		        $liste_sortie_stock.="<td>".$l->code_barre."</td>";
 		        $liste_sortie_stock.="<td>".$l->prix."</td>";
 		        $liste_sortie_stock.="<td>".$l->quantite."</td>";
 				$montant_poly = $l->prix*$l->quantite;
 				$motant_sortie_stock = $montant_sortie_stock + $montant_poly;
-		        $liste_sortie_stock.="<td>".$montant_poly"</td>";
+		        $liste_sortie_stock.="<td>".$montant_poly."</td>";
 		        $liste_sortie_stock.="</tr>";
 			}
-
-		$liste_sortie_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>';
+//echo $liste_sortie_stock;
+		$liste_sortie_stock.='</tbody><tfoot><tr><td colspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_sortie_stock.' </td></tr></tfoot></table>';
 $pdf->writeHTML($liste_sortie_stock, true, false, false, false, '');
-*/
+
 
 $montant_entree_stock=0;
 $liste_entree_stock = '
 <TABLE cellspacing="0" cellpadding="1" border="1">
 	<CAPTION>Liste des entrées de stock</CAPTION><br>
 	<THEAD>
-	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH><Quantité/TH> <TH>Montant</TH> </tr>		
+	<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH>Quantité</TH> <TH>Montant</TH> </tr>		
 	</THEAD>
-		<tbody><tr><td>test</td></tr></tbody></table>';
-/*		    while($l = $entree_stock->fetch()){
+		<tbody>';
+		    while($l = $entree_stock->fetch()){
 		        $liste_entree_stock.="<tr>";
-		        $liste_entree_stock.="<td>".$l->codep."</td>";
+		        $liste_entree_stock.="<td>".$l->code_poly."</td>";
 		        $liste_entree_stock.="<td>".$l->prix."</td>";
 		        $liste_entree_stock.="<td>".$l->quantite."</td>";
 				$montant_poly = $l->prix*$l->quantite;
 				$motant_entree_stock = $montant_entree_stock + $montant_poly;
-		        $liste_entree_stock.="<td>".$montant_poly"</td>";
+		        $liste_entree_stock.="<td>".$montant_poly."</td>";
 		        $liste_entree_stock.="</tr>";
 			}
-*/
-//		$liste_entree_stock.='</tbody><tfoot><tr><td collspan="3">TOTAL SORTIES DE STOCK :</td><td>'.$montant_entree_stock.' </td></tr></tfoot></table>';
+
+	$liste_entree_stock.='</tbody><tfoot><tr><td colspan="3">TOTAL ENTRÉE DE STOCK :</td><td>'.$montant_entree_stock.' </td></tr></tfoot></table>';
 
 $pdf->writeHTML($liste_entree_stock, true, false, false, false, '');
 
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('example_001.pdf', 'I');
+$pdf->Output('brouillard_'.$_POST['date'], 'I');
 ?>
