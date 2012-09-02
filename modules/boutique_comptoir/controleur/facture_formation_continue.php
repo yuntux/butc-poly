@@ -46,7 +46,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
 			fclose($generation_pdf);
 
-			header('Location: modules/generation_pdf/controleur/generer_pdf.php?creator=&autor=BUTC'.$_SESSION['login'].'&title=Facture vente interne&subject=Formation continue&keywords=&entete1=BUTC - Facture interne&entete2=Formation continue&nom_fichier=facture_'.$_GET['utilisateur'].'&id_pdf='.$id_pdf);
+			header('Location: modules/generation_pdf/controleur/generer_pdf.php?creator='.$_SESSION['login'].'&autor=BUTC&title=Facture vente interne&subject=Formation continue&keywords=&entete1=BUTC - Facture interne&entete2=Formation continue&nom_fichier=facture_'.$_GET['utilisateur'].'&id_pdf='.$id_pdf);
 
 
 	} else {

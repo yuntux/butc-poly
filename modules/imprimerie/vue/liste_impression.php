@@ -17,7 +17,7 @@ echo '<a href="index.php?module=imprimerie&action=ajout_impression">Ajout impres
             echo "</tr>";
 		}
 		echo '</TBODY></TABLE>';
-		echo '<a href="modules/imprimerie/controleur/generer_bon_impression.php?id='.$ligne->id.'">Imprimer bon d\'impression</a><br>';
+		echo '<a href="index.php?module=imprimerie&action=generer_bon_impression&id='.$ligne->id.'">Imprimer bon d\'impression</a><br>';
 		echo '<a href="index.php?module=imprimerie&action=supprimer_impression&id='.$ligne->id.'">Supprimer bon d\'impression</a><br>';
     }
 ?>
