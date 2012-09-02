@@ -10,7 +10,7 @@ echo '<h2>Liste des utilisateurs en formation continue (elligibles à la vente i
         while($ligne = $utilisateur_formation_continue->fetch()){
 			echo "<tr>";
             echo "<td>".$ligne->nom.' '.$ligne->prenom1."</td>";
-            echo '<td><a href="modules/boutique_comptoir/controleur/facture_formation_continue.php?utilisateur='.$ligne->login.'">Facture</a></td>';
+            echo '<td><a href="index.php?module=boutique_comptoir&action=facture_formation_continue&utilisateur='.$ligne->login.'">Facture</a></td>';
             echo "</tr>";
             }
     echo '</TBODY> 
