@@ -23,8 +23,8 @@
 <html lang="fr">
 <head>
 	<title>BUTC Polys</title>
-	<meta name="author" content="Aurélien DUMAINE">
-	<meta name="description" content="TX P12 : paiement en ligne des polys à l'UTC">
+	<meta name="author" content="Aur&acute;lien DUMAINE">
+	<meta name="description" content="TX P12 : paiement en ligne des polys &acute; l'UTC">
 	<meta name="keywords" content="UTC, TX">
 	<meta name="robots" content="ALL">
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">

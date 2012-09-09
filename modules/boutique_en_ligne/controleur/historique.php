@@ -23,7 +23,7 @@
 
 if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
-    include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
+    include_once CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 
 } else {
     
@@ -38,6 +38,6 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	$liste_commandes = liste_commandes($login);
 	$liste_retraits = liste_retraits($login);
 
-    include CHEMIN_VUE.'historique.php';
+    include_once CHEMIN_VUE.'historique.php';
 }
 ?>

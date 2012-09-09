@@ -23,7 +23,7 @@
 
 if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
-    include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
+    include_once CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 
 } else {
 
@@ -33,8 +33,8 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			$generation_pdf = fopen('modules/generation_pdf/controleur/'.$id_pdf, 'a');
 
 
-			require_once('modules/boutique_comptoir/modele/brouillard_caisse.php');
-			require_once('modules/boutique_en_ligne/modele/boutique_en_ligne.php');
+			include_once CHEMIN_MODELE.'brouillard_caisse.php';
+			include_once CHEMIN_MODELE.'boutique_en_ligne.php';
 
 
 			// Set some content to print
@@ -220,7 +220,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
 
 	} else {
-	        include CHEMIN_VUE_GLOBALE.'hacker.php';
+	        include_once CHEMIN_VUE_GLOBALE.'hacker.php';
 	}
 }
 ?>

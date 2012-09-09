@@ -30,7 +30,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			$id_pdf=$_SESSION['login'].date('dmY_His');
 			$generation_pdf = fopen('modules/generation_pdf/controleur/'.$id_pdf, 'a');
 
-			require_once('modules/boutique_en_ligne/modele/boutique_en_ligne.php');
+			include_once CHEMIN_MODELE.'boutique_en_ligne.php';
 
 			// Set some content to print
 			$html = "Date : ".date("d/m/Y")."<BR>";

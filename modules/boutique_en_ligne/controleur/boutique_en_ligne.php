@@ -23,7 +23,7 @@
 
 if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 
-    include CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
+    include_once CHEMIN_VUE_GLOBALE.'erreur_non_connecte.php';
 
 } else {
 	
@@ -44,7 +44,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	$liste_poly_gsu_cs =  lister_poly("GSU", "CS");
 	$liste_poly_gsu_tm =  lister_poly("GSU", "TM");
 
-	include(CHEMIN_LIB.'fonctions-panier.php');
+	include_once CHEMIN_LIB.'fonctions-panier.php';
 	creationPanier();
 
 	
@@ -61,6 +61,6 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			supprimerArticle($_GET['supprimer_poly']);
 
 
-        include CHEMIN_VUE.'boutique_en_ligne.php';
+        include_once CHEMIN_VUE.'boutique_en_ligne.php';
 	}
  ?>

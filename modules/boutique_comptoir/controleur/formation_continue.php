@@ -28,7 +28,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 } else {
 
 	if(isset($_SESSION['vendeur']) && $_SESSION['vendeur']==1) {
-	    include_once 'modules/boutique_en_ligne/modele/boutique_en_ligne.php';
+	    include_once CHEMIN_MODELE.'boutique_en_ligne.php';
 
 		$utilisateur_formation_continue = utilisateur_formation_continue();
 	    include CHEMIN_VUE.'formation_continue.php';

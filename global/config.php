@@ -30,7 +30,7 @@ define('SQL_DATABASE', 'demeter_poly');
 // Chemins à utiliser pour accéder aux vues/modeles/librairies
 $module = empty($module) ? !empty($_GET['module']) ? $_GET['module'] : 'index' : $module;
 define('CHEMIN_VUE',    'modules/'.$module.'/vue/');
-define('CHEMIN_MODELE', 'modules/'.$module.'/modele/');
+define('CHEMIN_MODELE', 'modeles/');
 define('CHEMIN_CONTROLEUR', 'modules/'.$module.'/controleur/');
 define('CHEMIN_VUE_GLOBALE', 'vues_globales/');
 define('CHEMIN_LIB',    'libs/');
