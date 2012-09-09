@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le : Dim 09 Septembre 2012 à 21:53
+-- Généré le : Dim 09 Septembre 2012 à 22:01
 -- Version du serveur: 5.1.61
 -- Version de PHP: 5.3.10-2
 
@@ -38,6 +38,13 @@ CREATE TABLE IF NOT EXISTS `entete_commande` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS POUR LA TABLE `entete_commande`:
+--   `login_acheteur`
+--       `utilisateur` -> `login`
+--   `login_vendeur`
+--       `utilisateur` -> `login`
+--
 
 -- --------------------------------------------------------
 
@@ -52,6 +59,11 @@ CREATE TABLE IF NOT EXISTS `entete_impression` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS POUR LA TABLE `entete_impression`:
+--   `login_imprimeur`
+--       `utilisateur` -> `login`
+--
 
 -- --------------------------------------------------------
 
@@ -68,6 +80,13 @@ CREATE TABLE IF NOT EXISTS `entete_retrait` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS POUR LA TABLE `entete_retrait`:
+--   `login_acheteur`
+--       `utilisateur` -> `login`
+--   `login_vendeur`
+--       `utilisateur` -> `login`
+--
 
 -- --------------------------------------------------------
 
@@ -83,6 +102,13 @@ CREATE TABLE IF NOT EXISTS `ligne_commande` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
+--
+-- RELATIONS POUR LA TABLE `ligne_commande`:
+--   `code_poly`
+--       `poly` -> `code_barre`
+--   `id_entete_commande`
+--       `entete_commande` -> `id`
+--
 
 -- --------------------------------------------------------
 
@@ -99,6 +125,14 @@ CREATE TABLE IF NOT EXISTS `ligne_impression` (
   KEY `id_entete_impression` (`id_entete_impression`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
+--
+-- RELATIONS POUR LA TABLE `ligne_impression`:
+--   `code_poly`
+--       `poly` -> `code_barre`
+--   `id_entete_impression`
+--       `entete_impression` -> `id`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +146,14 @@ CREATE TABLE IF NOT EXISTS `ligne_retrait` (
   `quantite` int(3) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+
+--
+-- RELATIONS POUR LA TABLE `ligne_retrait`:
+--   `code_poly`
+--       `poly` -> `code_barre`
+--   `id_entete_retrait`
+--       `entete_retrait` -> `id`
+--
 
 -- --------------------------------------------------------
 
@@ -142,6 +184,12 @@ CREATE TABLE IF NOT EXISTS `poly` (
   PRIMARY KEY (`code_barre`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS POUR LA TABLE `poly`:
+--   `login_devenir`
+--       `utilisateur` -> `login`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +201,12 @@ CREATE TABLE IF NOT EXISTS `rel_uv_branche` (
   `branche` enum('TC','GI','GP','GB','GM','GSM','GSU') NOT NULL DEFAULT 'TC',
   PRIMARY KEY (`uv`,`branche`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- RELATIONS POUR LA TABLE `rel_uv_branche`:
+--   `uv`
+--       `uv` -> `id`
+--
 
 -- --------------------------------------------------------
 
@@ -182,7 +236,6 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   PRIMARY KEY (`login`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-
 -- --------------------------------------------------------
 
 --
@@ -198,6 +251,11 @@ CREATE TABLE IF NOT EXISTS `uv` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- RELATIONS POUR LA TABLE `uv`:
+--   `id_responsable`
+--       `utilisateur` -> `login`
+--
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
