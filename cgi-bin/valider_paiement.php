@@ -66,6 +66,10 @@ if(!$unauthorized_server) {
 		enregistrer_paiement($ref_paybox, '', '', $_SERVER['REQUEST_URI']);	
 }
 
+
+// FIXME : la vérification de la signature ne fonctionne pas encore. On stock cependant la signature de chaque transaction en base.
+// Il sera donc possible de les vérifier à postériori
+
 /*include('/var/www/code/libs/fonctions-paybox.php');
 echo PbxVerSign( $_POST['signeddata'], 'pubkey.pem', monUrl);
 

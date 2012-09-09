@@ -74,7 +74,7 @@ if (ENVIRONNEMENT_DEMO) {
   <ul>
 	<?php
 	if (isset($_SESSION['administrateur']) &&  $_SESSION['administrateur']==1) {
-		echo '<li><a href="index.php?module=utilisateur&action=utilisateur"'; if($_GET['module']=="utilisateur" && $_GET['action']=="utilisateur") echo ' class="current" '; echo '>Gestion des droits</a></li>';
+//		echo '<li><a href="index.php?module=utilisateur&action=utilisateur"'; if($_GET['module']=="utilisateur" && $_GET['action']=="utilisateur") echo ' class="current" '; echo '>Gestion des droits</a></li>';
 		echo '<li><a href="index.php?module=statistique&action=statistique"'; if($_GET['module']=="statistique" && $_GET['action']=="statistique") echo ' class="current" '; echo '>Statistiques</a></li>';
 //		echo '<li><a href="index.php?module=utilisateur&action=incoherence_paiement" class="current">Incohérences de paiement</a></li>';
 //		echo '<li><a href="index.php?module=utilisateur&action=retrais_incoherents" class="current">Retraits supérieurs aux paiements/commandes</a></li>';

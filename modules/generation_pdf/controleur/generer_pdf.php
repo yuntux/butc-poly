@@ -77,14 +77,12 @@ while ($ligne = fgets($html))
 	$contenu_html.=$ligne;
 
 fclose($html);
-unlink($_GET['id_pdf']);
+//unlink($_GET['id_pdf']);
 
 // Print text using writeHTMLCell()
 $pdf->writeHTML($contenu_html, true, false, false, false, '');
 
 // This method has several options, check the source code documentation for more information.
 $pdf->Output($_GET['nom_fichier'].'.pdf', 'I');
-
-
 
 ?>

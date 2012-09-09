@@ -47,16 +47,4 @@ function liste_paiements($date, $moyen_paiement){
 	$resultats->setFetchMode(PDO::FETCH_OBJ);
 	return $resultats;
 }
-/*
-SELECT * 
-FROM  `entete_commande` 
-WHERE DATE( date_heure_paiement ) =  "2012-07-18"
-
-
-SELECT ec.id AS id_commande, SUM(p.prix*lc.quantite) AS montant_commande, ec.date_heure_paiement
-FROM entete_commande ec, ligne_commande lc
-		INNER JOIN poly p ON p.code_barre=lc.code_poly
-WHERE lc.id_entete_commande=ec.id AND ec.mode_paiement='PAYBOX' AND DATE(ec.date_heure_paiement)='2012-07-04'
-GROUP BY ec.id
-*/
 ?>

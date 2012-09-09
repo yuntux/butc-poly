@@ -166,6 +166,25 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 				';
 				$html.=$liste_paiements_interne;
 
+				$liste_paiements_moneo = '
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements MONEO</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody>';
+							while($l = $liste_moneo->fetch()){
+								$liste_paiements_moneo.="<tr>";
+								$liste_paiements_moneo.="<td>".$l->proprietaire_moyen_paiement."</td>";
+								$liste_paiements_moneo.="<td>".$l->ref."</td>";
+								$liste_paiements_moneo.="<td>".$l->montant_commande."</td>";
+								$liste_paiements_moneo.="</tr>";
+							}
+						$liste_paiements_moneo.='</tbody></table>
+				';
+				$html.=$liste_paiements_moneo;
+
+
 				$montant_sortie_stock=0;
 				$liste_sortie_stock = '
 				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
