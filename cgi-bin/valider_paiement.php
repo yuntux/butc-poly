@@ -32,10 +32,11 @@ $sign_ok = false;
 
 
 //LOG DE LA REQUETTE
+/*
 $monfichier = fopen('logs_paybox.txt', 'a+');
 fputs($monfichier, '___'.$date.'::'.$heure.'::'.$monUrl.' \n'); // On écrit le nouveau nombre de pages vues
 fclose($monfichier);
-
+*/
 
 //ip verification when using url http
 if($monUrl){
@@ -53,7 +54,7 @@ if($monUrl){
 
 
 if(!$unauthorized_server) {
-	include('../modules/boutique_en_ligne/modele/boutique_en_ligne.php');
+	include('../modeles/boutique_en_ligne.php');
 	include('../../global/init.php');
 
 	$montant_commande = montant_commande($ref_paybox)->fetch(); 
