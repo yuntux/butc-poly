@@ -75,3 +75,11 @@ html, body {
 	min-height: 100%;
 	padding-bottom: 50px;
 }
+
+#menu ul
+{
+ list-style:none;
+ width: 96%;
+ position:relative;			
+}
+

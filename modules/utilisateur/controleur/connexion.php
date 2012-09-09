@@ -34,6 +34,7 @@
 		$_SESSION['formation_continue'] = $detail_utilisateur->formation_continue;
 		$_SESSION['administrateur'] = $detail_utilisateur->administrateur;
 		$_SESSION['vendeur'] = $detail_utilisateur->vendeur;
+		$_SESSION['regisseur'] = $detail_utilisateur->regisseur;
 		$_SESSION['imprimeur'] = $detail_utilisateur->imprimeur;
 		$_SESSION['acheteur'] = $detail_utilisateur->acheteur;
 		$_SESSION['enseignant'] = $detail_utilisateur->enseignant;
