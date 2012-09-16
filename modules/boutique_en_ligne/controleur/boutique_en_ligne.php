@@ -28,11 +28,12 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 } else {
 	
     include_once CHEMIN_MODELE.'boutique_en_ligne.php';
+/*
 	$liste_poly_tc_cs = lister_poly("TC", "CS");
 	$liste_poly_tc_tm = lister_poly("TC", "TM");
 	$liste_poly_gi_cs = lister_poly("GI", "CS");
 	$liste_poly_gi_tm = lister_poly("GI", "TM");
-	$liste_poly_tsh =  lister_poly("%", "%");
+	$liste_poly_tsh =  lister_poly("%", "TSH");
 	$liste_poly_gm_cs =  lister_poly("GM", "CS");
 	$liste_poly_gm_tm =  lister_poly("GM", "TM");
 	$liste_poly_gsm_cs =  lister_poly("GSM", "CS");
@@ -43,6 +44,9 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	$liste_poly_gp_tm =  lister_poly("GP", "TM");
 	$liste_poly_gsu_cs =  lister_poly("GSU", "CS");
 	$liste_poly_gsu_tm =  lister_poly("GSU", "TM");
+*/
+
+	$liste_poly =  lister_poly_boutique_etu();
 
 	include_once CHEMIN_LIB.'fonctions-panier.php';
 	creationPanier();
@@ -50,7 +54,7 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 	
         if (isset($_POST['code_poly'])) { //si le formulaire a été envoyé, il faut vérifier les modifications
             $detail_poly = detailler_poly($_POST['code_poly'])->fetch();
-			if ($detail_poly->code_barre != "")
+			if ($detail_poly->code_barre != "" && $detail_poly->dispo_commande_en_ligne==1)
 				ajouterArticle($detail_poly->code_barre, 1, $detail_poly->prix);
 			else
 				$message_erreur = "Le poly ".$_POST['code_poly']." est invalide.";

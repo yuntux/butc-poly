@@ -1,0 +1,80 @@
+
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Recettes</CAPTION><br>
+					<THEAD>
+					<tr><TH>Moyen de paiement</TH> <TH>Nombre de paiements</TH> <TH>Total</TH> </tr>		
+					</THEAD>
+					<TBODY>
+					<tr> 
+					<td>PAYBOX</td>
+					<td>0</td>
+					<td></td>
+					</tr>
+					<tr>
+					<td>CB</td>
+					<td>0</td>
+					<td></td>
+					</tr>
+					<tr>
+					<td>MONEO</td>
+					<td>0</td>
+					<td></td>
+					</tr>
+					<tr>
+					<td>INTERNE</td>
+					<td>0</td>
+					<td></td>
+					</tr>
+					</TBODY>
+					<TFOOT>
+					<tr><td colspan="3" align="right">TOTAL : 0</td></tr>
+					</TFOOT>
+				</TABLE>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements PAYBOX</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody></table>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements CB</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody></table>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements CHEQUE</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody></table>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements INTERNE</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody></table>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des paiements MONEO</CAPTION><br>
+					<THEAD>
+					<tr><TH>Nom du tireur</TH> <TH>Références</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody></table>
+				
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des sorties de stock</CAPTION><br>
+					<THEAD>
+					<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH>Quantité</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody><tfoot><tr><td colspan="3">TOTAL SORTIES DE STOCK :</td><td>0</td></tr></tfoot></table>
+				<BR><BR><TABLE cellspacing="0" cellpadding="1" border="1">
+					<CAPTION>Liste des entrées de stock</CAPTION><br>
+					<THEAD>
+					<tr><TH>Code article</TH> <TH>Prix unitaire</TH> <TH>Quantité</TH> <TH>Montant</TH> </tr>		
+					</THEAD>
+						<tbody></tbody><tfoot><tr><td colspan="3">TOTAL ENTRÉE DE STOCK :</td><td>0</td></tr></tfoot></table>

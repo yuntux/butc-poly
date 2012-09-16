@@ -55,6 +55,30 @@ if ((!isset($_SESSION['login'])) || (empty($_SESSION['login'])))  {
 			fputs($fp, "PBX_REFUSE = ".PBX_REFUSE."\n");
 			fputs($fp, "PBX_ANNULE = ".PBX_ANNULE);
 
+			/*echo '<FORM ACTION = "/cgi-bin/modulev2.cgi" METHOD = post>';
+			echo '<INPUT TYPE = hidden NAME = PBX_MODE VALUE = "'.PBX_MODE.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_SITE VALUE = "'.PBX_SITE.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_RANG VALUE = "'.PBX_RANG.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_IDENTIFIANT VALUE = "'.PBX_IDENTIFIANT.'">';
+			$montant_en_centimes = $total_panier*100;
+			echo '<INPUT TYPE = hidden NAME = PBX_TOTAL VALUE = "'.$montant_en_centimes.'">'; //montant exprimé en centimes
+			echo '<INPUT TYPE = hidden NAME = PBX_DEVISE VALUE = "'.PBX_DEVISE.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_CMD VALUE = "'.$_SESSION['panier']['reference'].'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_PORTEUR VALUE = "'.$_SESSION['email'].'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_RETOUR VALUE = "'.PBX_RETOUR.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_REPONDRE_A VALUE = "'.PBX_REPONDRE_A.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_EFFECTUE VALUE = "'.PBX_EFFECTUE.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_REFUSE VALUE = "'.PBX_REFUSE.'">';
+			echo '<INPUT TYPE = hidden NAME = PBX_ANNULE VALUE = "'.PBX_ANNULE.'">';
+
+			if (ENVIRONNEMENT_DEMO) {
+				echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
+				echo '<INPUT TYPE = hidden NAME = PBX_PAYBOX VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
+				echo '<INPUT TYPE = hidden NAME = PBX_BACKUP1 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
+				echo '<INPUT TYPE = hidden NAME = PBX_BACKUP2 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
+			}
+			*/
+
 			if (ENVIRONNEMENT_DEMO) {
 				fputs($fp, "\nPBX_PAYBOX = https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi");
 				fputs($fp, "\nPBX_BACKUP1 = https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi");

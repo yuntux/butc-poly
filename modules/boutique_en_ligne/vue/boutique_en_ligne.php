@@ -61,30 +61,6 @@
 echo '</TABLE>';
 echo '</form>';
 
-
-/*echo '<FORM ACTION = "/cgi-bin/modulev2.cgi" METHOD = post>';
-echo '<INPUT TYPE = hidden NAME = PBX_MODE VALUE = "'.PBX_MODE.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_SITE VALUE = "'.PBX_SITE.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_RANG VALUE = "'.PBX_RANG.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_IDENTIFIANT VALUE = "'.PBX_IDENTIFIANT.'">';
-$montant_en_centimes = $total_panier*100;
-echo '<INPUT TYPE = hidden NAME = PBX_TOTAL VALUE = "'.$montant_en_centimes.'">'; //montant exprimé en centimes
-echo '<INPUT TYPE = hidden NAME = PBX_DEVISE VALUE = "'.PBX_DEVISE.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_CMD VALUE = "'.$_SESSION['panier']['reference'].'">';
-echo '<INPUT TYPE = hidden NAME = PBX_PORTEUR VALUE = "'.$_SESSION['email'].'">';
-echo '<INPUT TYPE = hidden NAME = PBX_RETOUR VALUE = "'.PBX_RETOUR.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_REPONDRE_A VALUE = "'.PBX_REPONDRE_A.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_EFFECTUE VALUE = "'.PBX_EFFECTUE.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_REFUSE VALUE = "'.PBX_REFUSE.'">';
-echo '<INPUT TYPE = hidden NAME = PBX_ANNULE VALUE = "'.PBX_ANNULE.'">';
-
-if (ENVIRONNEMENT_DEMO) {
-	echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
-	echo '<INPUT TYPE = hidden NAME = PBX_PAYBOX VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
-	echo '<INPUT TYPE = hidden NAME = PBX_BACKUP1 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
-	echo '<INPUT TYPE = hidden NAME = PBX_BACKUP2 VALUE = "https://preprod-tpeweb.paybox.com/cgi/MYchoix_pagepaiement.cgi">';
-}
-*/
 echo '<strong>Aucun polycopié payé ne sera remboursé. Aucun polycopié retiré ne sera repris ou échangé.</strong><br>';
 if ($total_panier>0){
 	if ($_SESSION['formation_continue']) {
@@ -97,7 +73,7 @@ if ($total_panier>0){
 	}
 
 	if (ENVIRONNEMENT_DEMO)
-		echo 'Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
+		echo '<br>Num carte de test : 4012 0010 3844 3335 -> juin 2016 -> 123';
 }
 echo '</FORM>';
 echo '</div>';
@@ -110,167 +86,11 @@ if (isset($message_erreur)) echo '<strong>'.$message_erreur.'</strong>';
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="liste_poly">
 <form name="code_poly" action="index.php?module=boutique_en_ligne&action=boutique_en_ligne" method="post">
 
-	<TABLE id="liste_poly">		
-		<CAPTION>Liste des poly disponibles</CAPTION>
-		<THEAD>
-			<TR><TH></TH> <TH>CS</TH> <TH>TM</TH> <TH>TSH</TH></TR>
-		</THEAD>
-
-		<TBODY>
-			<TR>
-				<TH>TC</TH>
-				<TD>
+<h3>Produits disponibles pour l'achat en ligne</h3>
 	<?php
-		while($poly = $liste_poly_tc_cs->fetch())
+		while($poly = $liste_poly->fetch())
 		{
 			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
 		}
 	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_tc_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</td>
-				<TD rowspan="7">
-	<?php
-		while($poly = $liste_poly_tsh->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-			</TR>
-
-			<TR>
-				<TH>GB</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gb_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gb_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-
-			<TR>
-				<TH>GI</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gi_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gi_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-
-			<TR>
-				<TH>GM</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gm_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gm_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-
-			<TR>
-				<TH>GP</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gp_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gp_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-
-			<TR>
-				<TH>GSM</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gsm_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gsm_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-
-			<TR>
-				<TH>GSU</TH>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gsu_cs->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-				<TD>
-	<?php
-		while($poly = $liste_poly_gsu_tm->fetch())
-		{
-			echo '<input type="submit" name="code_poly" value="'.$poly->code_barre.'">';
-		}
-	?>
-				</TD>
-
-			</TR>
-		<TBODY>
-	</TABLE>
-</FORM>
 </div>

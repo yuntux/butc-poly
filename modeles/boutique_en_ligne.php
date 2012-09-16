@@ -45,6 +45,18 @@ function lister_poly($branche="", $type=""){
 	return $resultats;
 }
 
+function lister_poly_boutique_etu(){
+	global $connexion;
+		$resultats=$connexion->query("
+		SELECT *
+		FROM poly
+		WHERE dispo_commande_en_ligne=1
+		ORDER BY code_barre
+		") or die(print_r($connexion->errorInfo()));
+	$resultats->setFetchMode(PDO::FETCH_OBJ);
+	return $resultats;
+}
+
 function modif_stock_poly($code_poly, $delta_stock){
 	global $connexion;
 	$resultats=$connexion->query("UPDATE poly SET stock_courant=stock_courant+(".$connexion->quote($delta_stock, PDO::PARAM_INT).") WHERE code_barre=".$connexion->quote($code_poly, PDO::PARAM_STR)) or die(print_r($connexion->errorInfo()));
