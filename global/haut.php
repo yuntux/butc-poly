@@ -57,7 +57,7 @@ if (ENVIRONNEMENT_DEMO) {
 
 <div class="left">	
 <form name="deco" action="index.php?module=utilisateur&action=deconnexion" method="post">
-<?php echo 'UTILISATEUR : '.$_SESSION['login']; ?>
+<?php echo 'UTILISATEUR : '.$_SESSION['login'].' BADGE NUMÉRO : '.$_SESSION['num_badge']; ?>
 <input type="submit" name="changer_etudiant" value="Déconnexion" class="btn_annuler">
 </form>
 </div>
