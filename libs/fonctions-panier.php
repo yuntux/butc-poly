@@ -1,4 +1,11 @@
 <?php
+/*******************************************************
+/* LIBRAIRIE EXTERNE ISSUE D'UN TUTORIEL
+/* Copyright © 2007 Joris CROZIER. 
+/* http://jcrozier.developpez.com/articles/web/panier/
+/*******************************************************
+
+
 //session_start();
 /**
  * Verifie si le panier existe, le créé sinon
