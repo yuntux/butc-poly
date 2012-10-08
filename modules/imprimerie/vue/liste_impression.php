@@ -25,7 +25,7 @@ echo '<a href="index.php?module=imprimerie&action=ajout_impression">Ajout impres
     while($ligne = $liste_impressions->fetch()){
 		echo '<h2>Impression n°'.$ligne->id.' ('.$ligne->date_heure_impression.' par '.$ligne->login_imprimeur.')</h2>';
 		echo'
-		<TABLE>
+		<TABLE  class="liste">
 			<THEAD>
 				<TR><TH>Code</TH> <TH>Quantite</TH></TR>
 			</THEAD>

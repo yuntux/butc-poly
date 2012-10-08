@@ -22,7 +22,7 @@
 <?php
 echo '<h1>Liste des polys</h1>
 <a href="index.php?module=imprimerie&action=ajout_poly">Ajout poly</a>
-		<TABLE>
+		<TABLE  class="liste">
 			<THEAD>
 				<TR><TH>Code poly</TH> <TH>UV</TH> <TH>Type</TH> <TH>Prix</TH> <TH>Nb ex commandés</TH> <TH>Nb ex retirés</TH> <TH>Nb ex à retirer</TH> <TH>Stock courant</TH> <TH>Action</TH></TR>
 			</THEAD>

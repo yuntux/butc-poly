@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" href="https://demeter.utc.fr/pls/portal30/docs/PAGE/PORTLETREPOSITORY/OTHER_PROVIDERS/PORTAIL_SIGAM/CSS/COMMUN.CSS" type="text/css">
     <script type="text/javascript" src="https://demeter.utc.fr/pls/portal30/docs/PAGE/PORTLETREPOSITORY/OTHER_PROVIDERS/PORTAIL_SIGAM/JS/commun.js"></script>
-    <link rel="stylesheet" href="style/tableaux.css" type="text/css">
+    <link rel="stylesheet" href="style/footer.css" type="text/css">
 	<link rel="shortcut icon" type="image/x-icon" href="https://ent.utc.fr/uPortal/favicon.ico"> 
 
 </head>

@@ -21,7 +21,7 @@
 ?>
 <div class="groupe" style="margin-top:10px;width:97.5%;" id="panier">
 <form name="modif_panier" action="index.php?module=boutique_en_ligne&action=boutique_en_ligne" method="post">
-<TABLE id="panier">
+<TABLE id="panier"  class="liste">
 	<CAPTION>Panier référence <?php if(isset($_SESSION['panier']['reference'])) echo $_SESSION['panier']['reference'];?></CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>

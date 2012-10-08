@@ -22,7 +22,7 @@
 <?php
 
 echo '<h2>Liste des utilisateurs en formation continue (elligibles à la vente interne)</h2>
-<TABLE>
+<TABLE class="liste">
     <THEAD>
         <TR><TH>Utilisateur</TH> <TH>Action</TH></TR>
     </THEAD>

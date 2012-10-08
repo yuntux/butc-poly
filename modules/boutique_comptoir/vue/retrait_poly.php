@@ -38,7 +38,7 @@ include CHEMIN_VUE.'cartouche_etudiant.php';
 </div>
 <div class="groupe" "float: right;margin-top:10px;width:57%; id="bon_retrait" autocomplete="off">
 <form name="modif_panier" action="index.php?module=boutique_comptoir&action=retirer_poly" method="post">
-<TABLE id="bon_retrait">
+<TABLE id="bon_retrait" class="liste">
 	<CAPTION>Bon de retrait</CAPTION>
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Payés par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Retirés par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Retirables par '.$_SESSION['etudiant_en_cours']['login'].'</TH> <TH>Stock</TH> <TH>Retrait</TH></TR>

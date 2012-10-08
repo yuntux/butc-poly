@@ -83,7 +83,7 @@ echo '<br>
 ';
 
 echo'
-<TABLE id="pannier">
+<TABLE id="pannier" class="liste">
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Quantité</TH> <TH>Prix Unitaire</TH> <TH>Montant</TH> <TH>Action</TH></TR>
 	</THEAD>

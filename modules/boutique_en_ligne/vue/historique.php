@@ -24,7 +24,7 @@
 echo '<h1>Hisorique de '.$login.'</h1>';
 
 echo '<h2>Synthèse</h2>
-<TABLE>
+<TABLE  class="liste">
 	<THEAD>
 		<TR><TH>Code</TH> <TH>Payés</TH> <TH>Retirés</TH> <TH>À retirer</TH> <TH>Stock</TH> </TR>
 	</THEAD>
